@@ -42,16 +42,13 @@ body {
 
 .home-socialbtn-email {
     font-size: 1.25em;
-    padding-left: 0.25em;
-}
-
-.fab {
-    font-weight: 300!important;
+    padding: 0.25em;
 }
 
 .home-socialbtn-email:hover,
-.fa-instagram:hover {
-    font-weight: 500;
+.fa-instagram:hover,
+.fa-user:hover {
+    font-weight: 800;
 }
 
 .home-picture {
