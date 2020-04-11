@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<div class="details-product">
+		<div class="details-image-carousel">
+			{{ include("product/_carousel.html.twig") }}
+		</div>
+		<div class="details-text">
+			<h2 class="details-title">{{ product.name }}</h2>
+			<h4 class="details-price">{{  product.price }}€</h4>
+			<a target="_blank" class="details-etsy-buy" href="{{ product.etsyLink }}">
+				<i class="fas fa-shopping-cart"></i>
+				Buy on &copy;Etsy</a>
+			<p class="details-description">{{ product.description }}</p>
+		</div>
+	</div>
+{% endblock %}

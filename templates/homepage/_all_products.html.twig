@@ -1,0 +1,17 @@
+<div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 cards-container">
+
+	{% for product in products %}
+		<div class="col mb-4">
+				<div class="product-card">
+					<img src="../asset/images/golden-chain-purse.jpg" class="card-img-top product-img" alt="...">
+					<p class="product-price">{{ product.price }}
+						€</p>
+					<a class="etsy-button" href="{{ product.etsyLink }}" target="_blank">Buy on Etsy &copy;</a>
+				</div>
+				<a class="product-details-link" href="{{ path('product_details', {product_id: product.id }) }}">
+					<h5 class="card-title">{{ product.name }}</h5>
+				</a>
+			</div>
+	{% endfor %}
+	
+</div>

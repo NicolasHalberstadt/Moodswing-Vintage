@@ -1,0 +1,20 @@
+<div class="slideshow-container">
+
+	{% for picture in product.pictures %}
+
+		<div class="slide-element fader">
+			<img src="../asset/images/uploads/{{ picture.path }}" class="product-details-image" alt="{{ product.name }}">
+		</div>
+	{% endfor %}
+
+
+	<!-- Next and previous buttons -->
+	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	<a class="next" onclick="plusSlides(1)">&#10095;</a>
+	<div style="text-align:center">
+		{% for picture in product.pictures %}
+			<span class="dot" onclick="currentSlide({{ picture.id }})"></span>
+		{% endfor %}
+	</div>
+</div>
+<br>

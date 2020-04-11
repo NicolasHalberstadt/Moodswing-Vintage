@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Moodswing Vintage
+{% endblock %}
+
+{% block body %}
+
+	{{ include('homepage/_image_header.html.twig') }}
+
+	<div class="home-filter">
+
+		{{ include('homepage/_filter_tool.html.twig') }}
+
+		{% if category is defined %}
+
+			{{ include('homepage/_products_by_category.html.twig') }}
+
+		{% else %}
+
+			{{ include('homepage/_all_products.html.twig') }}
+
+		{% endif %}
+
+	</div>
+{% endblock %}
