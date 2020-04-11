@@ -417,12 +417,54 @@ body {
 
 .footer-nav-link {
     text-decoration: none;
-    color: black;
+    color: rgb(226, 239, 207);
 }
 
 .footer-nav-link:hover {
     text-decoration: none;
-    color: black;
+    color: rgb(226, 239, 207);
+}
+
+
+/* Sign in & sign up forms */
+
+.login-form {
+    padding: 3em;
+    width: 50%;
+    margin: auto;
+}
+
+.login-form-emailLabel,
+.login-form-passwordLabel {
+    font-weight: 300;
+    color: rgb(212, 224, 194);
+}
+
+.login-form-signup-link {
+    color: rgba(247, 188, 198)
+}
+
+.login-form-signup-link:hover {
+    color: rgba(248, 204, 211);
+    text-decoration: none;
+}
+
+.login-form-signinBtn {
+    background-color: rgba(247, 188, 198);
+    border-color: white;
+    padding: 0.5em;
+    font-weight: 300;
+    font-size: 1em;
+}
+
+.login-form-signinBtn:hover {
+    background-color: rgba(248, 204, 211);
+    border-color: white;
+}
+
+.login-form-signinBtn:active {
+    border-color: rgba(247, 188, 198)!important;
+    background-color: white!important;
 }
 
 
