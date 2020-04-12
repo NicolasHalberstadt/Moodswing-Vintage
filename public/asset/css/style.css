@@ -500,6 +500,11 @@ body {
     .details-etsy-buy {
         margin-bottom: 2em;
     }
+    /* Login form */
+    .login-form {
+        width: 100%;
+        margin: auto;
+    }
     /* Footer */
     .footer-nav-link {
         padding: 1.5em;
