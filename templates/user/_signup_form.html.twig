@@ -1,0 +1,10 @@
+<div class="signup-form">
+	{{ form_start(form) }}
+
+	{{ form_row(form.firstname, {'attr': {'class': 'signup-form-field'}}) }}
+	{{ form_row(form.lastname, {'attr': {'class': 'signup-form-field'}}) }}
+	{{ form_row(form.email, {'attr': {'class': 'signup-form-field'}}) }}
+	{{ form_row(form.plain_password, {'attr': {'class': 'signup-form-field'}}) }}
+	{{ form_row(form.signup, {'attr': {'class': 'signup-form-button'}}) }}
+	{{ form_end(form) }}
+</div>

@@ -5,9 +5,11 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
@@ -43,7 +45,7 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=320)
+     * @ORM\Column(type="string", length=320, unique=true)
      * 
      * @Assert\NotBlank(
      *      message="The {{ value }} should not be blank")
@@ -54,11 +56,11 @@ class User implements UserInterface
      *      max = 320,
      *      minMessage = "Your {{ value }} must be at least {{ limit }} characters long",
      *      maxMessage = "Your {{ value }} cannot be longer than {{ limit }} characters")
-    */
+     */
     private $email;
-
+    
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="string")
      */
     private $password;
 
@@ -76,6 +78,8 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+
 
 
     public function getId(): ?int
@@ -170,6 +174,7 @@ class User implements UserInterface
     // IMPLEMENTATION //
     public function getRoles()
     {
+        return array($this->role);
     }
 
     public function getSalt()
@@ -184,5 +189,17 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plain_password;
+    }
+
+    public function setPlainPassword(string $plain_password): self
+    {
+        $this->plain_password = $plain_password;
+
+        return $this;
     }
 }

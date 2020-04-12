@@ -14,8 +14,8 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-         if ($this->getUser()) {
-             return $this->redirectToRoute('homepage');
+        if ($this->getUser()) {
+            return $this->redirectToRoute('homepage');
         }
 
         // get the login error if there is one
@@ -26,12 +26,6 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    /**
-     * @Route("/signup", name="app_signup")
-     */
-    public function signup()
-    {
-    }
     /**
      * @Route("/logout", name="app_logout")
      */

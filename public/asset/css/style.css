@@ -467,6 +467,25 @@ body {
     background-color: white!important;
 }
 
+.signup-form {
+    padding: 3em;
+    width: 50%;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.signup-form-field {
+    margin-bottom: 0.5em;
+}
+
+.signup-form-button {
+    background-color: rgba(247, 188, 198);
+    margin-top: 0.2em;
+}
+
 
 /* MEDIA */
 

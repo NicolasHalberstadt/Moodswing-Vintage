@@ -1,6 +1,16 @@
 security:
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
         users_in_memory: { memory: null }
     firewalls:
         dev:
@@ -19,7 +29,6 @@ security:
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
-
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
