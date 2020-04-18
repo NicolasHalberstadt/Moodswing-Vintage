@@ -4,6 +4,12 @@
 {% endblock %}
 
 {% block body %}
-	{{ include('_image_header.html.twig')}}
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="flash-{{ label }}">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
 	{{ include('user/_signup_form.html.twig') }}
 {% endblock %}

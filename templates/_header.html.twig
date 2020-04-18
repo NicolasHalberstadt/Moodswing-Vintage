@@ -13,17 +13,21 @@
 				<a href="{{ path('app_logout')}}">
 					<i class="fas fa-sign-out-alt"></i>
 				</a>
-			{% else %}
-				<a href="{{ path('app_login') }}">
+				<a href="{{ path('user_profile')}}">
 					<i class="far fa-user"></i>
 				</a>
-			{% endif %}
-			{% if is_granted('ROLE_ADMIN') %}
-			<a href="TODO: envoyer vers admin page"><i class="fas fa-tools"></i></a>
+			{% else %}
+				<a href="{{ path('app_login') }}">
+					<i class="fas fa-sign-in-alt"></i>
+				</a>
 			{% endif %}
 
+			{% if is_granted('ROLE_ADMIN') %}
+				<a href="TODO: envoyer vers admin page">
+					<i class="fas fa-tools"></i>
+				</a>
+			{% endif %}
 
 		</nav>
 	</div>
-
 </div>

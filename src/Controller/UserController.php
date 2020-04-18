@@ -33,6 +33,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash("success", "Your account has been successfully created");
             return $this->redirectToRoute('app_login');
         }
 
@@ -40,6 +41,33 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("user/profile", name="user_profile")
+     */
+    public function userProfile()
+    {
+        $user = $this->getUser();
+
+        return $this->render('user/details.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("user/delete", name="user_delete")
+     */
+    public function userDelete(Request $request)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
         
+        $this->get('security.token_storage')->setToken(null);
+        $request->getSession()->invalidate();
+        $this->addFlash("success", "Your account has been successfully deleted from our database");
+        return $this->redirectToRoute('homepage');
     }
 }

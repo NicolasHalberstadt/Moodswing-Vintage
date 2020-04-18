@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	{{ include('_image_header.html.twig') }}
+	<div class="user-card">
+
+		<h3>Welcome to your account
+			{{ user.firstname }}</h3>
+		<div class="user-details-table">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>Firstname</td>
+						<td>{{ user.firstname }}</td>
+					</tr>
+					<tr>
+						<td>Lastname</td>
+						<td>{{ user.lastname }}</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td>{{ user.email }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<a class="user-details-button-link" href="TODO: redirection forulaire modification compte">
+			<button type="button" class="btn user-details-button">
+				Modify my account
+			</button>
+		</a>
+
+		<button type="button" class="btn user-details-button" data-toggle="modal" data-target="#exampleModalCenter">
+			Delete my account
+		</button>
+
+		<!-- Modal -->
+		{{ include('user/_delete_modal.html.twig')}}
+
+
+	</div>
+	{{ include('_footer.html.twig') }}
+{% endblock %}

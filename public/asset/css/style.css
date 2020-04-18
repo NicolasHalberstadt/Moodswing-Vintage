@@ -2,6 +2,15 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.container-fluid {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content-wrap {
+    padding-bottom: 2.5rem;
+}
+
 
 /* HOME HEADER */
 
@@ -23,11 +32,12 @@ body {
     color: #FFC0C9;
     letter-spacing: 0.25em;
     font-size: 0.7em;
-    margin-left: 3.2em;
+    margin-left: 8.5em;
 }
 
 .home-homebtn a:hover {
-    color: #FFC0C9;
+    color: rgba(248, 204, 211);
+    text-decoration: none;
 }
 
 .home-socialsbtn {
@@ -406,12 +416,21 @@ body {
     font-weight: 300;
 }
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+}
+
 .footer-nav {
     margin: auto;
+    bottom: 0;
     width: 35%;
     padding: 2em;
     display: flex;
     justify-content: space-around;
+    align-items: flex-end;
     list-style-type: none;
 }
 
@@ -487,6 +506,44 @@ body {
 }
 
 
+/* USER DETAILS */
+
+.user-card {
+    padding-top: 10em;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.table {
+    border: 2px solid black;
+    width: 50%;
+    margin: auto;
+}
+
+.user-details-table {
+    padding: 1em;
+}
+
+.user-details-table tr {
+    text-align: left;
+}
+
+.user-details-button-link:hover {
+    text-decoration: none;
+}
+
+.user-details-button {
+    background-color: rgba(247, 188, 198);
+    color: white;
+}
+
+.user-details-button:hover {
+    background-color: rgba(248, 204, 211);
+    color: white;
+}
+
+
 /* MEDIA */
 
 @media (max-width: 575.98px) {
@@ -510,12 +567,12 @@ body {
         padding: 0;
     }
     /*.slideshow-container {
-        min-height: 455px;
-    }
-    .product-details-image {
-        min-height: 100%;
-        max-height: 455px;
-    }*/
+    min-height: 455px;
+}
+.product-details-image {
+    min-height: 100%;
+    max-height: 455px;
+}*/
     .details-etsy-buy {
         margin-bottom: 2em;
     }

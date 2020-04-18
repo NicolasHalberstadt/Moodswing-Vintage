@@ -44,3 +44,7 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
 }
+
+$('#myModal').on('shown.bs.modal', function() {
+    $('#myInput').trigger('focus')
+})
