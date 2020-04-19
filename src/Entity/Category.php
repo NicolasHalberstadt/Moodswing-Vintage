@@ -38,9 +38,15 @@ class Category
      */
     private $products;
 
+    public function __toString()
+    {
+        return $this->name; // <-- add here a real property which
+    }
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->created_at = new \DateTime();
     }
 
     public function getId(): ?int

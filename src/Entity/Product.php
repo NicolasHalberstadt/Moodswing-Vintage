@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -29,7 +30,7 @@ class Product
     private $description;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="decimal", scale=2)
      */
     private $price;
 
@@ -49,7 +50,7 @@ class Product
     private $size;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="product", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="product", orphanRemoval=true , cascade={"persist"})
      */
     private $pictures;
 
@@ -64,9 +65,16 @@ class Product
      */
     private $etsy_link;
 
+    public function __toString()
+    {
+        return $this->name; // <-- add here a real property which
+    }
+
     public function __construct()
     {
+        $this->created_at = new \DateTime();
         $this->pictures = new ArrayCollection();
+        $this->updated_at = new \DateTime();
     }
 
     public function getId(): ?int
@@ -98,12 +106,12 @@ class Product
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(int $price): self
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 
@@ -129,7 +137,7 @@ class Product
 
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
-        $this->updated_at = $updated_at;
+        $this->updated_at = new \DateTime();
 
         return $this;
     }

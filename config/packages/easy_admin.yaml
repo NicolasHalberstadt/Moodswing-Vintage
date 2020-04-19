@@ -1,6 +1,70 @@
-#easy_admin:
-#    entities:
-#        # List the entity class name you want to manage
-#        - App\Entity\Product
-#        - App\Entity\Category
-#        - App\Entity\User
+easy_admin:
+
+    site_name: 'Admin Moodswing'
+
+    design:
+        brand_color: 'rgba(247, 188, 198)'
+        menu:
+            - { entity: 'User', icon: 'user' }
+            - Product
+            - { entity: 'Category', icon: 'tag' }
+
+    user:
+        name_property_path: 'username'
+        display_name: true
+
+    entities:
+
+        Product:
+            class: App\Entity\Product
+            new:
+                fields:
+                - name
+                - description
+                - { property: 'price', type: 'money' }
+                - size
+                - etsy_link
+                - { property: 'category', type: 'entity', class: 'App\Entity\Category' }
+                - { property: 'pictures', type: 'collection', type_options: { entry_type: 'App\Form\ImageType', by_reference: false }}
+            
+            edit:
+                fields:
+                - name
+                - description
+                - { property: 'price', type: 'money' }
+                - size
+                - etsy_link
+                - { property: 'category', type: 'entity', class: 'App\Entity\Category' }
+                - { property: 'pictures', type: 'collection', type_options: { entry_type: 'App\Form\ImageType', by_reference: false }}
+
+        Category:        
+            class: App\Entity\Category
+            new:
+                fields:
+                - name
+                - { property: 'products', type: 'entity', class: 'App\Entity\Product' }
+            
+            edit:
+                fields:
+                - name
+                - { property: 'products', type: 'entity', class: 'App\Entity\Product' }
+               
+
+        User:    
+            class: App\Entity\User
+            form:
+                fields: 
+                - { type: 'tab', label: 'Basic informations', icon: 'user' }
+                - firstname
+                - lastname
+                - email
+                - { property: 'updated_at'}
+                - { type: 'tab', label: 'Role', icon: 'user-cog' }
+                -   property: 'role'
+                    type: 'choice'
+                    type_options:
+                        mapped: true
+                        expanded: true
+                        multiple: false
+                        choices: { 'User': 'ROLE_USER', 'Administrator': 'ROLE_ADMIN' }
+            disabled_actions: ['new']
