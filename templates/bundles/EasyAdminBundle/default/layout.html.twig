@@ -1,0 +1,7 @@
+{% extends '@!EasyAdmin/default/layout.html.twig' %}
+
+{% block header_logo %}
+    <a href="{{ path('homepage') }}">
+        {{- easyadmin_config('site_name') -}}
+    </a>
+{% endblock header_logo %}
