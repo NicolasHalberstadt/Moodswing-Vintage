@@ -445,12 +445,40 @@ body {
 }
 
 
-/* Sign in & sign up forms */
+/* forms */
+
+.form {
+    padding-top: 8em;
+    padding: 3em;
+    width: 70%;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.form-field {
+    margin-bottom: 0.5em;
+}
+
+.form-button {
+    background-color: rgba(247, 188, 198);
+    margin-top: 0.2em;
+}
+
+
+/* LOGIN */
 
 .login-form {
     padding: 3em;
     width: 50%;
     margin: auto;
+}
+
+.remember-small-text {
+    font-size: 0.8em;
+    font-weight: 200;
 }
 
 .login-form-emailLabel,
@@ -486,23 +514,14 @@ body {
     background-color: white!important;
 }
 
-.signup-form {
-    padding: 3em;
-    width: 50%;
-    margin: auto;
-}
 
-.form-group {
-    margin-bottom: 0;
-}
+/* UPDATE FROM */
 
-.signup-form-field {
-    margin-bottom: 0.5em;
-}
-
-.signup-form-button {
-    background-color: rgba(247, 188, 198);
-    margin-top: 0.2em;
+.user-update-title {
+    text-align: center;
+    font-weight: 300;
+    font-size: 2em;
+    padding: 2em;
 }
 
 

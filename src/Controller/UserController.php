@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\UserUpdatePwdType;
+use App\Form\UserUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,6 +58,63 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/user/profile/update", name="user_profile_update")
+     */
+    public function userPorifleUpdate(Request $request)
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(UserUpdateType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash("success", "Your account has been successfully updated");
+            return $this->redirectToRoute('user_profile');
+        }
+
+        return $this->render('user/update.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("user/password/update", name="user_password_update")
+     */
+    public function UserPwdUpdate(Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserUpdatePwdType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $actualPassword = $form->get('actual_password')->getData();
+            $match = $encoder->isPasswordValid($user, $actualPassword);
+
+            if ($match) {
+
+                $newPassword =  $form->get('plain_password')->getData();
+                $user->setPassword($encoder->encodePassword($user, $newPassword));
+                $this->getDoctrine()->getManager()->flush();
+
+                $this->addFlash("success", "Your password has been successfully updated");
+                return $this->redirectToRoute('user_profile');
+            }
+                $this->addFlash("danger", "Your current password is not correct");
+                return $this->redirectToRoute('user_password_update');
+            }
+
+        return $this->render('user/update_password.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
      * @Route("user/delete", name="user_delete")
      */
     public function userDelete(Request $request)
@@ -64,9 +123,10 @@ class UserController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($user);
         $em->flush();
-        
+
         $this->get('security.token_storage')->setToken(null);
         $request->getSession()->invalidate();
+
         $this->addFlash("success", "Your account has been successfully deleted from our database");
         return $this->redirectToRoute('homepage');
     }

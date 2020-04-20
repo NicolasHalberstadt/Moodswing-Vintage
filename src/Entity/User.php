@@ -22,24 +22,24 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="The {{value}} should not be blank")
-     *  @Assert\Length(
+     * @Assert\NotBlank(message="The firstname should not be blank")
+     * @Assert\Length(
      *      min = 2,
      *      max = 50,
-     *      minMessage = "Your {{ value }} must be at least {{ limit }} characters long",
-     *      maxMessage = "Your {{ value }} cannot be longer than {{ limit }} characters"
+     *      minMessage = "Your firstname must be at least {{ limit }} characters long",
+     *      maxMessage = "Your firstname cannot be longer than {{ limit }} characters"
      * )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="The {{ value }} should not be blank")
+     * @Assert\NotBlank(message="Your lastname should not be blank")
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
-     *      minMessage = "Your {{ value }} must be at least {{ limit }} characters long",
-     *      maxMessage = "Your {{ value }} cannot be longer than {{ limit }} characters"
+     *      minMessage = "Your lastname must be at least {{ limit }} characters long",
+     *      maxMessage = "Your lastname cannot be longer than {{ limit }} characters"
      * )
      */
     private $lastname;
@@ -48,14 +48,14 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=320, unique=true)
      * 
      * @Assert\NotBlank(
-     *      message="The {{ value }} should not be blank")
+     *      message="Your email should not be blank")
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.")
      * @Assert\Length(
      *      min = 3,
      *      max = 320,
-     *      minMessage = "Your {{ value }} must be at least {{ limit }} characters long",
-     *      maxMessage = "Your {{ value }} cannot be longer than {{ limit }} characters")
+     *      minMessage = "Your email must be at least {{ limit }} characters long",
+     *      maxMessage = "Your email cannot be longer than {{ limit }} characters")
      */
     private $email;
     
@@ -78,8 +78,6 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
-
-
 
 
     public function getId(): ?int

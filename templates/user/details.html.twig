@@ -1,4 +1,8 @@
 {% extends "base.html.twig" %}
+{% block title %}
+	My profile
+{% endblock %}
+
 {% block body %}
 	{{ include('_image_header.html.twig') }}
 	<div class="user-card">
@@ -24,7 +28,7 @@
 			</table>
 		</div>
 
-		<a class="user-details-button-link" href="TODO: redirection forulaire modification compte">
+		<a class="user-details-button-link" href="{{ path('user_profile_update') }}">
 			<button type="button" class="btn user-details-button">
 				Modify my account
 			</button>
@@ -34,10 +38,13 @@
 			Delete my account
 		</button>
 
+		<a href='{{ path('user_password_update') }}'>
+			<button type="button" class="btn user-details-button">
+				update my password
+			</button>
+		</a>
 		<!-- Modal -->
 		{{ include('user/_delete_modal.html.twig')}}
-
-
 	</div>
 	{{ include('_footer.html.twig') }}
 {% endblock %}

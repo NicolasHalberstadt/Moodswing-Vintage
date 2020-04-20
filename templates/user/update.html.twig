@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	{{ include('_image_header.html.twig')}}
+	<div class="form">
+		<h2 class="user-update-title">Update your informations</h2>
+		{{ form_start(form) }}
+
+		{{ form_row(form.firstname, {'attr': {'class': 'form-field'}}) }}
+		{{ form_row(form.lastname, {'attr': {'class': 'form-field'}}) }}
+		{{ form_row(form.email, {'attr': {'class': 'form-field'}}) }}
+		{{ form_row(form.save, {'attr': {'class': 'form-button'}}) }}
+
+		{{ form_end(form) }}
+	</div>
+	
+
+{% endblock %}
