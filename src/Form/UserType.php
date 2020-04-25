@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class UserType extends AbstractType
 {
@@ -27,16 +28,23 @@ class UserType extends AbstractType
                 'required' => true,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
-            'constraints' => [
-                new NotBlank([ 
-                    'message' => "The password should not be blank"
+                'constraints' => [
+                    new NotBlank([
+                        'message' => "The password should not be blank"
                     ]),
-                new Length([
-                    'min' => 6, 
-                    'max' => 128, 
-                    'minMessage' => "Your password must be at least {{ limit }} characters long", 
-                    'maxMessage' => "Your password  cannot be longer than {{ limit }} characters"])
-            ]])
+                    new Length([
+                        'min' => 6,
+                        'max' => 128,
+                        'minMessage' => "Your password must be at least {{ limit }} characters long",
+                        'maxMessage' => "Your password  cannot be longer than {{ limit }} characters"
+                    ]),
+                    new Regex([
+                        "pattern" => "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d\W]{6,}$/",
+                        'message' => "Your password must contain at least 6 characters including 1 upper case, 1 lower case and 1 number"
+                    ])
+                ]
+
+            ])
             ->add('signup', SubmitType::class);
     }
 

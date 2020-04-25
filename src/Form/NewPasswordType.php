@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class NewPasswordType extends AbstractType
 {
@@ -33,6 +34,10 @@ class NewPasswordType extends AbstractType
                         'max' => 128,
                         'minMessage' => "Your password must be at least {{ limit }} characters long",
                         'maxMessage' => "Your password  cannot be longer than {{ limit }} characters"
+                    ]),
+                    new Regex([
+                        "pattern" => "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d\W]{6,}$/",
+                        'message' => "Your password must contain at least 6 characters including 1 upper case, 1 lower case and 1 number"
                     ])
                 ]
             ])
