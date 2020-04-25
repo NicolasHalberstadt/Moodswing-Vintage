@@ -3,11 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ForgotPasswordType;
 use App\Form\UserType;
 use App\Form\UserUpdatePwdType;
 use App\Form\UserUpdateType;
+use App\Repository\UserRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -85,7 +90,7 @@ class UserController extends AbstractController
     /**
      * @Route("user/password/update", name="user_password_update")
      */
-    public function UserPwdUpdate(Request $request, UserPasswordEncoderInterface $encoder)
+    public function userPwdUpdate(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = $this->getUser();
         $form = $this->createForm(UserUpdatePwdType::class, $user);
@@ -104,9 +109,9 @@ class UserController extends AbstractController
                 $this->addFlash("success", "Your password has been successfully updated");
                 return $this->redirectToRoute('user_profile');
             }
-                $this->addFlash("danger", "Your current password is not correct");
-                return $this->redirectToRoute('user_password_update');
-            }
+            $this->addFlash("danger", "Your current password is not correct");
+            return $this->redirectToRoute('user_password_update');
+        }
 
         return $this->render('user/update_password.html.twig', [
             'user' => $user,
@@ -130,4 +135,5 @@ class UserController extends AbstractController
         $this->addFlash("success", "Your account has been successfully deleted from our database");
         return $this->redirectToRoute('homepage');
     }
+
 }

@@ -18,6 +18,13 @@
 	<input type="password" name="password" id="inputPassword" class="form-control" required>
 
 	<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+	<a href="{{ path('user_password_forgot') }}">
+		<p class="login-form-forgot-password">Forgot your password ?</p>
+	</a>
+
+	<hr>
+	
 	<p class="signup-text">You don't have an account ? Create one
 		<a class="login-form-signup-link" href="{{ path('app_signup') }}">here</a>
 	</p>
@@ -26,7 +33,8 @@
 	<div class="checkbox mb-3">
 		<label>
 			<input type="checkbox" name="_remember_me">
-			Remember me <span class="remember-small-text">(Don't use this option on shared or public device)</span>
+			Remember me
+			<span class="remember-small-text">(Don't use this option on shared or public device)</span>
 		</label>
 
 	</div>

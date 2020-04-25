@@ -79,6 +79,11 @@ class User implements UserInterface
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $resetToken;
+
 
     public function getId(): ?int
     {
@@ -197,6 +202,18 @@ class User implements UserInterface
     public function setPlainPassword(string $plain_password): self
     {
         $this->plain_password = $plain_password;
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }
