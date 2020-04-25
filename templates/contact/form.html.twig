@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact form
+{% endblock %}
+
+{% block body %}
+	{{ include('_image_header.html.twig')}}
+
+	{{ form_start(form)}}
+
+	{{ form_row(form.name, {'attr': {'class': 'form-field'}}) }}
+	{{ form_row(form.email, {'attr': {'class': 'form-field'}}) }}
+	{{ form_row(form.text, {'attr': {'class': 'form-field'}}) }}
+	{{ form_row(form.send, {'attr': {'class': 'form-button'}}) }}
+
+	{{ form_end(form) }}
+{% endblock %}

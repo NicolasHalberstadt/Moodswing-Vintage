@@ -7,7 +7,7 @@
 			<a href="https://www.instagram.com/moodswingvintage/">
 				<i class="fab fa-instagram"></i>
 			</a>
-			<a href="TODO: diriger sur formulaire de contact" class="home-socialbtn-email">&#x40;</a>
+			<a href="{{ path('contact') }}" class="home-socialbtn-email">&#x40;</a>
 
 			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 				<a href="{{ path('app_logout')}}">
