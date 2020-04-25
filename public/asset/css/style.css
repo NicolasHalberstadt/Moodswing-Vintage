@@ -547,7 +547,6 @@ body {
 
 .table {
     border: 2px solid black;
-    width: 50%;
     margin: auto;
 }
 
@@ -557,6 +556,12 @@ body {
 
 .user-details-table tr {
     text-align: left;
+}
+
+.user-details-button-container {
+    padding-top: 1em;
+    display: flex;
+    justify-content: space-between;
 }
 
 .user-details-button-link:hover {

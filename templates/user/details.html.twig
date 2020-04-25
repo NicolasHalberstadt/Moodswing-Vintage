@@ -26,23 +26,26 @@
 					</tr>
 				</tbody>
 			</table>
+			<div class="user-details-button-container">
+				<a class="user-details-button-link" href="{{ path('user_profile_update') }}">
+					<button type="button" class="btn user-details-button">
+						Update my account
+					</button>
+				</a>
+
+				<a class="user-details-button-link" href='{{ path('user_password_update') }}'>
+					<button type="button" class="btn user-details-button">
+						Update my password
+					</button>
+				</a>
+
+				<button type="button" class="btn user-details-button" data-toggle="modal" data-target="#exampleModalCenter">
+					Delete my account
+				</button>
+			</div>
 		</div>
 
-		<a class="user-details-button-link" href="{{ path('user_profile_update') }}">
-			<button type="button" class="btn user-details-button">
-				Modify my account
-			</button>
-		</a>
 
-		<button type="button" class="btn user-details-button" data-toggle="modal" data-target="#exampleModalCenter">
-			Delete my account
-		</button>
-
-		<a href='{{ path('user_password_update') }}'>
-			<button type="button" class="btn user-details-button">
-				Update my password
-			</button>
-		</a>
 		<!-- Modal -->
 		{{ include('user/_delete_modal.html.twig')}}
 	</div>
