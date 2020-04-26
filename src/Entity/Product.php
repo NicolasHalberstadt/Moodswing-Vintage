@@ -65,9 +65,14 @@ class Product
      */
     private $etsy_link;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="products")
+     */
+    private $users;
+
     public function __toString()
     {
-        return $this->name; // <-- add here a real property which
+        return $this->name;
     }
 
     public function __construct()
@@ -75,6 +80,7 @@ class Product
         $this->created_at = new \DateTime();
         $this->pictures = new ArrayCollection();
         $this->updated_at = new \DateTime();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -205,6 +211,34 @@ class Product
     public function setEtsyLink(string $etsy_link): self
     {
         $this->etsy_link = $etsy_link;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeProduct($this);
+        }
 
         return $this;
     }

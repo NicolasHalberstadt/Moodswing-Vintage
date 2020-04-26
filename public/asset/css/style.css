@@ -55,9 +55,14 @@ body {
     font-size: 1.25em;
 }
 
+.fa-tools:hover {
+    color: rgb(187, 140, 147);
+}
+
 .home-socialbtn-email:hover,
 .fa-instagram:hover,
-.fa-user:hover {
+.fa-user:hover,
+.fa-heart:hover {
     font-weight: 800;
 }
 
@@ -289,6 +294,21 @@ body {
 
 .card-title:hover {
     color: rgb(126, 90, 95);
+}
+
+
+/* Favorited products */
+
+.product-list-favored-product>i {
+    color: rgba(238, 182, 191);
+    padding-left: 0.5em;
+    top: -0.2em;
+}
+
+.product-list-not-favored-product>i {
+    color: white;
+    padding-left: 0.5em;
+    top: -0.2em;
 }
 
 
@@ -602,12 +622,12 @@ body {
         padding: 0;
     }
     /*.slideshow-container {
-    min-height: 455px;
-}
-.product-details-image {
-    min-height: 100%;
-    max-height: 455px;
-}*/
+        min-height: 455px;
+    }
+    .product-details-image {
+        min-height: 100%;
+        max-height: 455px;
+    }*/
     .details-etsy-buy {
         margin-bottom: 2em;
     }

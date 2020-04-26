@@ -9,17 +9,13 @@
 
 	<div class="home-filter">
 
-		{{ include('homepage/_filter_tool.html.twig') }}
+		{% include 'homepage/_filter_tool.html.twig' %}
 
 		{% if category is defined %}
-
-			{{ include('homepage/_products_by_category.html.twig') }}
-
-		{% else %}
-
-			{{ include('homepage/_all_products.html.twig') }}
-
+			{% set products = category.products %}
 		{% endif %}
+
+		{% include "_products_list.html.twig" %}
 
 	</div>
 {% endblock %}

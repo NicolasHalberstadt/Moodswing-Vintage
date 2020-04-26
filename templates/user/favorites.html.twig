@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	{{ include('_image_header.html.twig')}}
+	{% set products = user.products %}
+	{% include "_products_list.html.twig" %}
+    {% if products is empty %}
+    <h2>You don't have any favorites products for the moment, try adding one</h2>
+    {% endif %}
+    
+
+{% endblock %}

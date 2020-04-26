@@ -17,11 +17,13 @@ class MainController extends AbstractController
         // get all products
         $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $user = $this->getUser();
 
         // send them to homepage
         return $this->render('homepage/index.html.twig', [
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'user' => $user
         ]);
     }
 
@@ -33,11 +35,14 @@ class MainController extends AbstractController
         $category = $this->getDoctrine()->getRepository(Category::class)->find($category_id);
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
+        $user = $this->getUser();
 
         return $this->render('homepage/index.html.twig', [
             'category' => $category,
             'categories' => $categories,
-            'products' => $products
+            'products' => $products,
+            'user' => $user
+            
         ]);
     }
 

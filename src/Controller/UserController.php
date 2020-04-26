@@ -2,17 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Entity\User;
-use App\Form\ForgotPasswordType;
 use App\Form\UserType;
 use App\Form\UserUpdatePwdType;
 use App\Form\UserUpdateType;
-use App\Repository\UserRepository;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -65,7 +61,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/profile/update", name="user_profile_update")
      */
-    public function userPorifleUpdate(Request $request)
+    public function userProfileUpdate(Request $request)
     {
         $user = $this->getUser();
 
@@ -136,4 +132,61 @@ class UserController extends AbstractController
         return $this->redirectToRoute('homepage');
     }
 
+    /**
+     * @Route("user/favorite/{product_id}/add", name="user_favorite_add")
+     */
+    public function favoriteAdd($product_id)
+    {
+
+        $product = $this->getDoctrine()->getRepository(Product::class)->find($product_id);
+
+        if ($product) {
+            $user = $this->getUser();
+            $user->addProduct($product);
+            $product->addUser($user);
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
+
+            return $this->redirect($_SERVER['HTTP_REFERER']);
+        }
+
+        $this->addFlash('danger', 'This product does not exist');
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("user/favorite/{product_id}/remove", name="user_favorite_remove")
+     */
+    public function favoriteRemove($product_id)
+    {
+
+        $product = $this->getDoctrine()->getRepository(Product::class)->find($product_id);
+
+        if ($product) {
+            $user = $this->getUser();
+            $user->removeProduct($product);
+            $product->removeUser($user);
+
+            $manager = $this->getDoctrine()->getManager();
+            $manager->flush();
+
+            return $this->redirect($_SERVER['HTTP_REFERER']);
+        }
+
+        $this->addFlash('danger', 'This product does not exist');
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("user/favorites", name="user_favorites")
+     */
+    public function userFavoritesList()
+    {
+        $user = $this->getUser();
+
+        return $this->render('user/favorites.html.twig', [
+            'user' => $user
+        ]);
+    }
 }
