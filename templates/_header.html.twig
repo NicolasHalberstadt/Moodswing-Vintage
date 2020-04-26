@@ -4,30 +4,30 @@
 			<a href="{{ path('homepage') }}">home</a>
 		</nav>
 		<nav class="home-socialsbtn">
-			<a href="https://www.instagram.com/moodswingvintage/">
+			<a href="https://www.instagram.com/moodswingvintage/" title='Moodswing Vintage on Instagram' target='_blank'>
 				<i class="fab fa-instagram"></i>
 			</a>
-			<a href="{{ path('contact') }}" class="home-socialbtn-email">&#x40;</a>
+			<a href="{{ path('contact') }}" class="home-socialbtn-email" title="Contact form">&#x40;</a>
 
 			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 				
-				<a href="{{ path('user_profile')}}">
+				<a href="{{ path('user_profile')}}" title='My profile'>
 					<i class="far fa-user"></i>
 				</a>
-				<a href="{{ path('user_favorites') }}">
+				<a href="{{ path('user_favorites') }}" title='List of my favorites product'>
 					<i class="far fa-heart"></i>
 				</a>
-				<a href="{{ path('app_logout')}}">
-					<i class="fas fa-sign-out-alt"></i>
+				<a href="{{ path('app_logout')}}" title="SignOut">
+					<i class="fas fa-sign-out-alt" ></i>
 				</a>
 			{% else %}
-				<a href="{{ path('app_login') }}">
+				<a href="{{ path('app_login') }}" title="SignIn">
 					<i class="fas fa-sign-in-alt"></i>
 				</a>
 			{% endif %}
 
 			{% if is_granted('ROLE_ADMIN') %}
-				<a href="/admin">
+				<a href="/admin" title="Admin pannel">
 					<i class="fa fa-tools"></i>
 				</a>
 			{% endif %}
