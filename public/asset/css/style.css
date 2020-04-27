@@ -53,10 +53,11 @@ body {
 
 .home-socialbtn-email {
     font-size: 1.25em;
+    font-weight: 300;
 }
 
 .fa-tools:hover {
-    color: rgb(187, 140, 147);
+    color: rgba(248, 204, 211);
 }
 
 .home-socialbtn-email:hover,
@@ -402,6 +403,16 @@ body {
 
 .details-title {
     font-size: 1.5em;
+}
+
+.product-details-favored,
+.product-details-not-favored {
+    color: rgba(247, 188, 198);
+}
+
+.product-details-favored:hover,
+.product-details-not-favored:hover {
+    color: rgba(248, 204, 211, 0.637);
 }
 
 .details-price {

@@ -47,7 +47,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("user/password/forgot", name="user_password_forgot")
      */
-    public function ForgottenPassword(Request $request, UserRepository $userRepo, MailerInterface $mailer, UserPasswordEncoderInterface $encoder, TokenGeneratorInterface $tokenGenerator)
+    public function ForgottenPassword(Request $request, UserRepository $userRepo, MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator)
     {
         $form = $this->createForm(ForgotPasswordType::class);
         $form->handleRequest($request);

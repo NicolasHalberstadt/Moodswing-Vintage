@@ -6,13 +6,26 @@
 		</div>
 		<div class="details-text">
 			<h2 class="details-title">{{ product.name }}</h2>
+
+			{% if user is not null %}
+				{% set users = product.users %}
+				{% if user in users %}
+					<a class="product-details-favored" href="{{ path('user_favorite_remove' , {'product_id': product.id}) }}" title="Remove from my favorites">
+						<i class="fa fa-heart"></i>
+					</a>
+				{% else %}
+					<a class="product-details-not-favored" href="{{ path('user_favorite_add', {'product_id': product.id}) }}" title="Add to my favorites">
+						<i class="far fa-heart"></i>
+					</a>
+				{% endif %}
+			{% endif %}
+
 			<h4 class="details-price">{{  product.price }}€</h4>
 			<a target="_blank" class="details-etsy-buy" href="{{ product.etsyLink }}">
 				<i class="fas fa-shopping-cart"></i>
 				Buy on &copy;Etsy</a>
 			<p class="details-description">{{ product.description }}</p>
 		</div>
-
 	</div>
 
 {% endblock %}

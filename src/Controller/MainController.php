@@ -42,19 +42,20 @@ class MainController extends AbstractController
             'categories' => $categories,
             'products' => $products,
             'user' => $user
-            
         ]);
     }
 
     /**
      * @Route("/product/{product_id}", name="product_details")
      */
-    public function productDetails($product_id)
+    public function productDetails(int $product_id)
     {
         $product = $this->getDoctrine()->getRepository(Product::class)->find($product_id);
+        $user = $this->getUser();
 
         return $this->render('product/details.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'user' => $user
         ]);
     }
 }
