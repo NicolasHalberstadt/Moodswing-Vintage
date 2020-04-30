@@ -1,6 +1,8 @@
 <div class="form">
-	{{ form_start(form) }}
 
+	{{ form_start(form) }}
+	<h1 class="form-title">Create Your account</h1>
+	<hr>
 	{{ form_row(form.firstname, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.lastname, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.email, {'attr': {'class': 'form-field'}}) }}
