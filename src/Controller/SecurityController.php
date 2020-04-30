@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-            $this->addFlash("success", "Welcome" . $this->getUser());
+            $this->addFlash("success", "Welcome " . $this->getUser()->getUsername());
             return $this->redirectToRoute('homepage');
         }
 
