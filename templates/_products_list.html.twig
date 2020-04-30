@@ -22,10 +22,17 @@
 
 				</p>
 				<a class="etsy-button" href="{{ product.etsyLink }}" target="_blank">Buy on Etsy &copy;</a>
+
 			</div>
-			<a class="product-details-link" href="{{ path('product_details', {product_id: product.id }) }}">
+			<div>
+			<a class="product-details-link stretched-link" href="{{ path('product_details', {product_id: product.id }) }}">
 				<h5 class="card-title">{{ product.name }}</h5>
+
 			</a>
+			<p class="mobile-product-price">{{ product.price }}
+				€
+			</p>
+			</div>
 		</div>
 	{% endfor %}
 
