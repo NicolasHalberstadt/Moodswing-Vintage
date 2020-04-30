@@ -4,33 +4,35 @@
 			<a href="{{ path('homepage') }}">home</a>
 		</nav>
 		<nav class="home-socialsbtn">
-			<a href="https://www.instagram.com/moodswingvintage/" title='Moodswing Vintage on Instagram' target='_blank'>
+			<a href="https://www.instagram.com/moodswingvintage/" class="home-socials-btn-instagram" title='Moodswing Vintage on Instagram' target='_blank'>
 				<i class="fab fa-instagram"></i>
 			</a>
-			<a href="{{ path('contact') }}" class="home-socialbtn-email" title="Contact form">&#x40;</a>
+			<a href="{{ path('contact') }}" class="home-socialbtn-email " title="Contact form">&#x40;</a>
 
-			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-				
-				<a href="{{ path('user_profile')}}" title='My profile'>
+			<div class="profile-dropdown">
+				<a class="home-socialsbtn-profile" onclick="profileDropdownFunction()">
 					<i class="far fa-user"></i>
 				</a>
-				<a href="{{ path('user_favorites') }}" title='List of my favorites product'>
-					<i class="far fa-heart"></i>
-				</a>
-				<a href="{{ path('app_logout')}}" title="SignOut">
-					<i class="fas fa-sign-out-alt" ></i>
-				</a>
-			{% else %}
-				<a href="{{ path('app_login') }}" title="SignIn">
-					<i class="fas fa-sign-in-alt"></i>
-				</a>
-			{% endif %}
-
-			{% if is_granted('ROLE_ADMIN') %}
-				<a href="/admin" title="Admin pannel">
-					<i class="fa fa-tools"></i>
-				</a>
-			{% endif %}
+				<div id="myProfileDropdown" class="profile-dropdown-content">
+					<a href="{{ path('user_profile')}}" class="profile-dropdown-content-link dropdown-user" title='My profile'>
+						<i class="far fa-user"></i>my profile
+					</a>
+					{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+						<a href="{{ path('user_favorites') }}" class="profile-dropdown-content-link dropdown-favorites" title='List of my favorites product'>
+							<i class="far fa-heart"></i>favorites
+						</a>
+						<a href="{{ path('app_logout')}}" class="profile-dropdown-content-link dropdown-logout" title="SignOut">
+							<i class="fas fa-sign-out-alt"></i>logout
+						</a>
+					{% endif %}
+					{% if is_granted('ROLE_ADMIN') %}
+						<hr>
+						<a href="/admin" {# class="home-socialsbtn-admin"#} class="profile-dropdown-content-link dropdown-admin" title="Admin pannel">
+							<i class="fa fa-tools"></i>admin
+						</a>
+					{% endif %}
+				</div>
+			</div>
 
 		</nav>
 	</div>
