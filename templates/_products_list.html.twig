@@ -1,4 +1,4 @@
-<div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 cards-container">
+<div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 cards-container">
 
 	{% for product in products %}
 		<div class="col mb-4">
@@ -21,12 +21,12 @@
 					{% endif %}
 
 				</p>
-				<a class="etsy-button" href="{{ product.etsyLink }}" target="_blank">Buy on Etsy &copy;</a>
+				<a  class="etsy-button" href="{{ product.etsyLink }}" target="_blank">Buy on Etsy &copy;</a>
 
 			</div>
-			<div>
-			<a class="product-details-link stretched-link" href="{{ path('product_details', {product_id: product.id }) }}">
-				<h5 class="card-title">{{ product.name }}</h5>
+			<div class="product-card-text">
+			<a  class="product-details-link stretched-link" href="{{ path('product_details', {product_id: product.id }) }}" tabindex="0">
+				<h5  class="card-title">{{ product.name }}</h5>
 
 			</a>
 			<p class="mobile-product-price">{{ product.price }}
