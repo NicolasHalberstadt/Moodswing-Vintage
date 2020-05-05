@@ -3,7 +3,12 @@
 	{% for product in products %}
 		<div class="col mb-4">
 			<div class="product-card">
-				<img src="../asset/images/golden-chain-purse.jpg" class="card-img-top product-img" alt="...">
+				{% set firstImage = product.pictures|first %}
+				{% if firstImage is same as(false)%}
+					<img src="uploads/files/" class="card-img-top product-img" alt="...">
+				{% else %}
+					<img src="uploads/files/{{ firstImage.path }}" class="card-img-top product-img" alt="...">
+				{% endif %}
 				<p class="product-price">{{ product.price }}
 					€
 
@@ -21,17 +26,16 @@
 					{% endif %}
 
 				</p>
-				<a  class="etsy-button" href="{{ product.etsyLink }}" target="_blank">Buy on Etsy &copy;</a>
+				<a class="etsy-button" href="{{ product.etsyLink }}" target="_blank">Buy on Etsy &copy;</a>
 
 			</div>
 			<div class="product-card-text">
-			<a  class="product-details-link stretched-link" href="{{ path('product_details', {product_id: product.id }) }}" tabindex="0">
-				<h5  class="card-title">{{ product.name }}</h5>
-
-			</a>
-			<p class="mobile-product-price">{{ product.price }}
-				€
-			</p>
+				<a class="product-details-link stretched-link" href="{{ path('product_details', {product_id: product.id }) }}" tabindex="0">
+					<h5 class="card-title">{{ product.name }}</h5>
+				</a>
+				<p class="mobile-product-price">{{ product.price }}
+					€
+				</p>
 			</div>
 		</div>
 	{% endfor %}
