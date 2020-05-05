@@ -13,7 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/contact", name="contact",
+     * options={"sitemap" = {"priority" = 0.7, "changefreq" = "weekly" }})
      */
     public function contact(Request $request, MailerInterface $mailer)
     {
