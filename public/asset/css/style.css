@@ -55,6 +55,7 @@ body {
 .home-socialsbtn-profile {
     border: none;
     padding: 0;
+    background-color: white;
 }
 
 .profile-dropdown-content {
@@ -693,6 +694,31 @@ tbody>tr:first-child>td {
 .footer-nav-link:hover {
     text-decoration: none;
     color: rgb(195, 235, 205);
+}
+
+
+/* 404 page */
+
+.four-o-four-container {
+    text-align: center;
+    padding: 10em;
+    margin: auto;
+}
+
+.four-o-four-title {
+    padding-bottom: 2em;
+}
+
+.four-o-four-text {
+    margin-bottom: 11em;
+}
+
+.four-o-four-home-link {
+    color: rgb(209, 181, 185);
+}
+
+.four-o-four-home-link:hover {
+    color: #FFEBEE;
 }
 
 

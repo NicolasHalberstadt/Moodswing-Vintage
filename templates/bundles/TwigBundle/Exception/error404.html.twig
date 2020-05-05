@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	{% include "_image_header.html.twig" %}
+	<div class="four-o-four-container">
+		<h1 class="four-o-four-title">Page not found</h1>
+
+		<p class="four-o-four-text">
+			The requested page couldn't be located. Checkout for any URL misspelling or
+			<a class="four-o-four-home-link"href="{{ path('homepage') }}">return to the homepage</a>.
+		</p>
+	</div>
+{% endblock %}
