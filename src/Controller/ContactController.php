@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use ReCaptcha\ReCaptcha;
 
 class ContactController extends AbstractController
 {
@@ -21,32 +22,42 @@ class ContactController extends AbstractController
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+            if (isset($_POST['g-recaptcha-response'])) {
+                $recaptcha = new ReCaptcha('6LfDUPMUAAAAANd54Yy55r8oGhRq5c2n4tsW_rgH');
+                $resp = $recaptcha->setExpectedHostname('recaptcha-demo.appspot.com')->verify($_POST['g-recaptcha-response']);
+                dump('$_post existe');
+                dump($resp->getErrorCodes());
+                if ($resp->isSuccess()) {
+                    dump('resp is success');
+                    $contactFormData = $form->getData();
 
-            $contactFormData = $form->getData();
+                    $email = (new Email())
+                        ->from('contactFormMail@gmail.com')
+                        ->to('moodswingvintage@gmail.com')
+                        ->subject('New Contact form request')
+                        ->text('You have a new contact request from ' . $contactFormData['name'] . ', ' . $contactFormData['email'] . ' saying : ' . $contactFormData['text'], 'text/plain');
+                    $mailer->send($email);
 
-            $email = (new Email())
-                ->from('contactFormMail@gmail.com')
-                ->to('moodswingvintage@gmail.com')
-                ->subject('New Contact form request')
-                ->text('You have a new contact request from ' . $contactFormData['name'] . ', ' . $contactFormData['email'] . ' saying : ' . $contactFormData['text'], 'text/plain');
-            $mailer->send($email);
+                    $this->addFlash('success', 'Your contact request has been sent');
 
-            $this->addFlash('success', 'Your contact request has been sent');
+                    $email = (new TemplatedEmail())
+                        ->from('moodswingvintage@gmail.com')
+                        ->to($contactFormData['email'])
+                        ->subject('Your contact request')
+                        ->htmlTemplate('emails/contact_confirmation.html.twig')
+                        ->context([
+                            'user' => $contactFormData['name']
+                        ]);
+                    $mailer->send($email);
 
-            $email = (new TemplatedEmail())
-                ->from('moodswingvintage@gmail.com')
-                ->to($contactFormData['email'])
-                ->subject('Your contact request')
-                ->htmlTemplate('emails/contact_confirmation.html.twig')
-                ->context([
-                    'user' => $contactFormData['name']
-                ]);
-            $mailer->send($email);
-
-            return $this->redirectToRoute('homepage');
+                    return $this->redirectToRoute('homepage');
+                }
+                dump('resp is false');
+            }
         }
-
         return $this->render('contact/form.html.twig', [
             'form' => $form->createView()
         ]);
