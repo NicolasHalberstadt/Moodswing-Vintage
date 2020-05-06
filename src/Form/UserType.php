@@ -4,10 +4,11 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -44,6 +45,11 @@ class UserType extends AbstractType
                     ])
                 ]
 
+            ])
+            ->add('legal_notice', CheckboxType::class, [
+                'label' => 'I acknowledge having read and understood the T & Cs and I accept them',
+                'required' => true,
+                'mapped' => false,
             ])
             ->add('signup', SubmitType::class);
     }

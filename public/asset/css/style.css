@@ -722,6 +722,35 @@ tbody>tr:first-child>td {
 }
 
 
+/* Legal notices */
+
+.legal-container {
+    padding: 2em;
+    font-weight: 300;
+}
+
+.legal-container h2 {
+    font-size: 2.5em;
+    font-weight: 300;
+    padding: 1em;
+}
+
+.legal-container h3 {
+    font-size: 1.5;
+    font-weight: 300;
+    padding-top: 1em;
+}
+
+.legal-container h2,
+.legal-container h3 {
+    text-align: center;
+}
+
+.TCS-container {
+    padding-top: 2em;
+}
+
+
 /* MEDIA */
 
 @media (max-width: 1200px) {

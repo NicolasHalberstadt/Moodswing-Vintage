@@ -61,4 +61,18 @@ class MainController extends AbstractController
             'user' => $user
         ]);
     }
+
+    /**
+     * @Route("/legal/fr", name="legal_notice_fr")
+     */
+    public function legalNoticeFr() {
+        return $this->render('legal/legal_fr.html.twig');
+    }
+
+    /**
+     * @Route("/legal/en", name="legal_notice_en")
+     */
+    public function legalNoticeEn() {
+        return $this->render('legal/legal_en.html.twig');
+    }
 }
