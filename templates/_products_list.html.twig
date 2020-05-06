@@ -5,9 +5,9 @@
 			<div class="product-card">
 				{% set firstImage = product.pictures|first %}
 				{% if firstImage is same as(false)%}
-					<img src="uploads/files/" class="card-img-top product-img" alt="...">
+					<h2 class="">Nothing to see here... let's wait</h2>
 				{% else %}
-					<img src="uploads/files/{{ firstImage.path }}" class="card-img-top product-img" alt="...">
+					<img src="../uploads/files/{{ firstImage.path }}" class="card-img-top product-img" alt="...">
 				{% endif %}
 				<p class="product-price">{{ product.price }}
 					€
