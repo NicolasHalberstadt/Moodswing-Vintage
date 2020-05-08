@@ -12,7 +12,7 @@
 	{{ form_row(form.name, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.email, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.text, {'attr': {'class': 'form-field'}}) }}
-	<div class="g-recaptcha" data-sitekey="6LfDUPMUAAAAAGsUzTH3oV6dgofvVjALDvXbvGrC"></div>
+	<div class="g-recaptcha" data-sitekey={{ google_recaptcha_site_key }}></div>
 	<br>
 	{{ form_row(form.send, {'attr': {'class': 'form-button'}}) }}
 

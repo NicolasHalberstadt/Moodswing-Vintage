@@ -21,12 +21,12 @@ class ContactController extends AbstractController
     {
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
-
-
+        $google_recaptcha_site_key = $this->getParameter('google_recaptcha_site_key');
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (isset($_POST['g-recaptcha-response'])) {
-                $recaptcha = new ReCaptcha('6LfDUPMUAAAAANd54Yy55r8oGhRq5c2n4tsW_rgH');
+                $secret = $this->getParameter('google_recatchat_secret');
+                $recaptcha = new ReCaptcha($secret);
                 $resp = $recaptcha->setExpectedHostname('recaptcha-demo.appspot.com')->verify($_POST['g-recaptcha-response']);
                 dump('$_post existe');
                 dump($resp->getErrorCodes());
@@ -59,7 +59,8 @@ class ContactController extends AbstractController
             }
         }
         return $this->render('contact/form.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'google_recaptcha_site_key' => $google_recaptcha_site_key
         ]);
     }
 }
