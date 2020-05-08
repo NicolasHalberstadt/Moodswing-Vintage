@@ -27,14 +27,10 @@ class ContactController extends AbstractController
             if (isset($_POST['g-recaptcha-response'])) {
                 $secret = $this->getParameter('google_recatcha_secret');
                 $recaptcha = new ReCaptcha($secret);
-                $resp = $recaptcha->setExpectedHostname('recaptcha-demo.appspot.com')->verify($_POST['g-recaptcha-response']);
-                dump('$_post existe');
-                dump($resp->getErrorCodes());
-                dump($resp->getHostname());
-                if ($resp->isSuccess()) {
-                    dump('resp is success');
-                    $contactFormData = $form->getData();
+                $resp = $recaptcha->verify($_POST['g-recaptcha-response']);
 
+                if ($resp->isSuccess()) {
+                    $contactFormData = $form->getData();
                     $email = (new Email())
                         ->from('contactFormMail@gmail.com')
                         ->to('moodswingvintage@gmail.com')
@@ -56,7 +52,6 @@ class ContactController extends AbstractController
 
                     return $this->redirectToRoute('homepage');
                 }
-                dump('resp is false');
             }
         }
         return $this->render('contact/form.html.twig', [
