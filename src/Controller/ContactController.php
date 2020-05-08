@@ -25,7 +25,7 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (isset($_POST['g-recaptcha-response'])) {
-                $secret = $this->getParameter('google_recatchat_secret');
+                $secret = $this->getParameter('google_recatcha_secret');
                 $recaptcha = new ReCaptcha($secret);
                 $resp = $recaptcha->setExpectedHostname('recaptcha-demo.appspot.com')->verify($_POST['g-recaptcha-response']);
                 dump('$_post existe');
