@@ -112,8 +112,6 @@ class SecurityController extends AbstractController
                 $this->addFlash('danger', 'Token unknown');
                 return $this->redirectToRoute('homepage');
             }
-
-            dump($form->get('new_password')->getData());
             $user->setResetToken(null);
             $user->setPassword($passwordEncoder->encodePassword($user, $form->get('new_password')->getData()));
             $entityManager->flush();
