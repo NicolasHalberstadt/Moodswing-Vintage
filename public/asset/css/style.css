@@ -758,7 +758,7 @@ tbody>tr:first-child>td {
 
 /* MEDIA */
 
-@media (max-width: 1200px) {
+@media (min-width: 768px) and (max-width: 991.98px) {
     /* Homepage */
     .home-header {
         padding: 2em;
@@ -799,19 +799,33 @@ tbody>tr:first-child>td {
     .dropdown {
         font-size: 40px;
     }
+    .dropdown-content {
+        border: 2px solid #FFB6C1;
+        border-radius: 10px;
+    }
+    .dropdown-content a {
+        padding-left: 20px;
+    }
     .cards-container {
         padding: 0;
         padding-top: 1em;
     }
+    .mb-4 {
+        padding: 0;
+    }
     .product-card {
-        padding: 1.5em;
+        padding: 0;
+        margin: auto;
+        width: 90%;
+        height: 337px;
     }
     .product-card-text {
-        font-size: 1.5em;
+        font-size: 2em;
+        padding-left: 0.8em;
     }
     .mobile-product-price {
         display: inline;
-        font-size: 2em;
+        font-size: 1.5em;
         padding-top: 0.3em;
     }
     .etsy-button {
@@ -891,34 +905,20 @@ tbody>tr:first-child>td {
     /* Footer */
     .footer {
         width: 100%;
-        font-size: 0.8em;
+        font-size: 40px;
         margin: auto;
+        margin-top: 2em;
         margin-bottom: 4em;
     }
     .footer-nav-link {
-        padding: 1.5em;
+        padding: 0 0.5em;
     }
-    /*TODO: text card too big, one button for signin and signup green like arrow */
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
     .user-card {
         width: 70%;
         margin-top: 8em;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .product-card-text {
-        padding-left: 1.3em;
-    }
-    .user-card {
-        width: 70%;
-        margin-top: 8em;
-        margin-bottom: 15em;
-    }
-    .user-details-table {
-        font-size: 1em;
     }
 }
 
