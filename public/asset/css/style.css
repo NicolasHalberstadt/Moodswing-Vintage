@@ -108,9 +108,7 @@ a.home-socialbtn-email,
     padding: 0.15em;
 }
 
-.fa-instagram:hover,
-a.home-socialbtn-email:hover,
-.home-socialsbtn-profile>i:hover {
+.home-socialsbtn i:hover {
     font-weight: 800;
     color: #FFC0C9;
 }
@@ -133,6 +131,7 @@ a.home-socialbtn-email:hover,
     width: 16px;
     display: inline-block;
     padding: 0!important;
+    font-style: normal;
 }
 
 .home-socialsbtn-admin {
@@ -766,6 +765,10 @@ tbody>tr:first-child>td {
     }
     .home-socialsbtn {
         margin-right: -15px;
+    }
+    .home-socialsbtn i,
+    .home-socialbtn-email {
+        font-size: 20px;
     }
     .cards-container {
         padding: 0;
