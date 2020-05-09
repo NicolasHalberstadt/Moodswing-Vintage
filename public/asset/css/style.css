@@ -760,14 +760,40 @@ tbody>tr:first-child>td {
 
 @media (max-width: 1200px) {
     /* Homepage */
+    .home-header {
+        padding: 2em;
+    }
     .home-homebtn a {
         margin-left: 4em;
+        font-size: 20px;
     }
     .home-socialsbtn {
-        margin-right: -15px;
+        margin-right: -35px;
     }
     .home-socialsbtn i,
     .home-socialbtn-email {
+        font-size: 20px;
+    }
+    .home-socials-btn-instagram {
+        width: unset;
+    }
+    .home-socialbtn-email {
+        width: unset;
+        font-weight: 700;
+        top: 1px;
+    }
+    .profile-dropdown-content {
+        width: 120px;
+        font-size: 20px;
+    }
+    .home-picture-title {
+        font-size: 20px;
+        padding-top: 3.5em;
+    }
+    .home-picture-subtitle {
+        font-size: 15px;
+    }
+    .dropdown {
         font-size: 20px;
     }
     .cards-container {
@@ -776,10 +802,12 @@ tbody>tr:first-child>td {
     }
     .product-card {
         padding: 0;
+        width: 170px;
+        height: 200px;
     }
     .mobile-product-price {
         display: inline;
-        font-size: 0.8em;
+        font-size: 2em;
         padding-top: 0.3em;
     }
     .etsy-button {
@@ -792,7 +820,7 @@ tbody>tr:first-child>td {
         filter: none;
     }
     .card-title {
-        font-size: 0.9em;
+        font-size: 1.5em;
         text-align: left;
         margin-bottom: 1px;
     }
