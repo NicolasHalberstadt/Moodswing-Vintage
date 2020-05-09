@@ -49,6 +49,16 @@ class Picture
      */
     private $product;
 
+    /**
+     * @ORM\Column(type="bigint")
+     */
+    private $etsy_id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rank;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -126,5 +136,29 @@ class Picture
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
         }
+    }
+
+    public function getEtsyId(): ?int
+    {
+        return $this->etsy_id;
+    }
+
+    public function setEtsyId(int $etsy_id): self
+    {
+        $this->etsy_id = $etsy_id;
+
+        return $this;
+    }
+
+    public function getRank(): ?int
+    {
+        return $this->rank;
+    }
+
+    public function setRank(int $rank): self
+    {
+        $this->rank = $rank;
+
+        return $this;
     }
 }

@@ -70,6 +70,11 @@ class Product
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $etsy_id;
+
     public function __toString()
     {
         return $this->name;
@@ -239,6 +244,18 @@ class Product
             $this->users->removeElement($user);
             $user->removeProduct($this);
         }
+
+        return $this;
+    }
+
+    public function getEtsyId(): ?int
+    {
+        return $this->etsy_id;
+    }
+
+    public function setEtsyId(int $etsy_id): self
+    {
+        $this->etsy_id = $etsy_id;
 
         return $this;
     }

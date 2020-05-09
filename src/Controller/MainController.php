@@ -3,11 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Picture;
 use App\Entity\Product;
+use App\Repository\CategoryRepository;
+use App\Repository\PictureRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Response;
 
 class MainController extends AbstractController
 {
@@ -15,11 +20,10 @@ class MainController extends AbstractController
      * @Route("/", name="homepage",
      * options={"sitemap" = true})
      */
-    public function homepage()
+    public function homepage(ProductRepository $productRepo, CategoryRepository $categoryRepo)
     {
-        // get all products
-        $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
-        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $categories = $categoryRepo->findAll();
+        $products = $productRepo->findAll();
         $user = $this->getUser();
 
         // send them to homepage
@@ -63,16 +67,126 @@ class MainController extends AbstractController
     }
 
     /**
+     * @Route("/categories/update", name="update_categories")
+     * 
+     */
+    public function updateCategories(CategoryRepository $categoryRepo)
+    {
+
+        $client = HttpClient::create();
+        $apiKey = "2bqddccebry4nblkj11o6ugv";
+        $apiResponse = $client->request('GET', 'https://openapi.etsy.com/v2/shops/moodswingvintage/sections?api_key=' . $apiKey)->toArray();
+        $apiCategories = $apiResponse['results'];
+        foreach ($apiCategories as $apiCategory) {
+            $category = $categoryRepo->findOneBy(['etsy_id' => $apiCategory['shop_section_id']]);
+
+            if ($category === null) {
+                $category = new Category();
+                $category->setName($apiCategory['title']);
+                $category->setEtsyId($apiCategory['shop_section_id']);
+                $category->setCreatedAt(new \DateTime());
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($category);
+                $em->flush();
+            }
+        }
+        $this->addFlash('success', 'THe categories have been updated');
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/products/update", name="update_products")
+     */
+    public function updateProducts(ProductRepository $productRepo, CategoryRepository $categoryRepo)
+    {
+        $client = HttpClient::create();
+        $apiKey = "2bqddccebry4nblkj11o6ugv";
+        // get all the products from the shop
+        $apiProductsResponse = $client->request('GET', 'https://openapi.etsy.com/v2/shops/moodswingvintage/listings/active?includes=MainImage&limit=70&api_key=' . $apiKey)->toArray();
+        $apiProducts = $apiProductsResponse['results'];
+
+        // PRODUCTS
+        foreach ($apiProducts as $apiProduct) {
+            // does the product already exists in db ?
+            $product = $productRepo->findOneBy(['etsy_id' => $apiProduct['listing_id']]);
+
+
+            if ($product !== null) {
+                // update info
+                $product->setName($apiProduct['title']);
+                $product->setDescription($apiProduct['description']);
+                $product->setPrice($apiProduct['price']);
+                $product->setEtsyLink($apiProduct['url']);
+                $product->setUpdatedAt(new \DateTime('now'));
+            } else {
+                // add new product
+                $product = new Product();
+                $product->setName($apiProduct['title']);
+                $product->setDescription($apiProduct['description']);
+                $product->setPrice($apiProduct['price']);
+                $product->setEtsyLink($apiProduct['url']);
+                $product->setEtsyId($apiProduct['listing_id']);
+                $product->setCreatedAt(new \DateTime('now'));
+
+                $category = $categoryRepo->findOneBy(['etsy_id' => $apiProduct['shop_section_id']]);
+                $product->setCategory($category);
+            }
+            // make get request to get all pictures from product
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($product);
+            $manager->flush();
+        }
+        $this->addFlash('success', 'The products have been updated');
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/pictures/update", name="update_pictures")
+     */
+    public function updatePictures(PictureRepository $pictureRepo, ProductRepository $productRepo)
+    {
+        $client = HttpClient::create();
+        $apiKey = "2bqddccebry4nblkj11o6ugv";
+        $products = $productRepo->findAll();
+        foreach ($products as $product) {
+            // get product images from api
+            $apiProductPicturesResponse = $client->request('GET', 'https://openapi.etsy.com/v2/listings/' . $product->getEtsyId() . '/images?api_key=' . $apiKey)->toArray();
+            $apiProductPictures = $apiProductPicturesResponse['results'];
+            foreach ($apiProductPictures as $apiProductPicture) {
+                $productPicture = $pictureRepo->findOneBy(['etsy_id' => $apiProductPicture['listing_image_id']]);
+
+                if ($productPicture === null) {
+                    $picture = new Picture();
+                    $picture->setPath($apiProductPicture['url_fullxfull']);
+                    $picture->setEtsyId($apiProductPicture['listing_image_id']);
+                    $picture->setCreatedAt(new \DateTime());
+                    $picture->setRank($apiProductPicture['rank']);
+                    $product->addPicture($picture);
+                    $manager = $this->getDoctrine()->getManager();
+                    $manager->persist($picture);
+                    $manager->flush();
+                }
+            }
+           
+        }
+        $this->addFlash('success', 'The pictures have been updated');
+        return $this->redirectToRoute('homepage');
+    }
+
+
+    /**
      * @Route("/legal/fr", name="legal_notice_fr")
      */
-    public function legalNoticeFr() {
+    public function legalNoticeFr()
+    {
         return $this->render('legal/legal_fr.html.twig');
     }
 
     /**
      * @Route("/legal/en", name="legal_notice_en")
      */
-    public function legalNoticeEn() {
+    public function legalNoticeEn()
+    {
         return $this->render('legal/legal_en.html.twig');
     }
 }

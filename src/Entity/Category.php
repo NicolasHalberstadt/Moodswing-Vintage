@@ -38,6 +38,11 @@ class Category
      */
     private $products;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $etsy_id;
+
     public function __toString()
     {
         return $this->name; // <-- add here a real property which
@@ -117,6 +122,18 @@ class Category
                 $product->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEtsyId(): ?int
+    {
+        return $this->etsy_id;
+    }
+
+    public function setEtsyId(int $etsy_id): self
+    {
+        $this->etsy_id = $etsy_id;
 
         return $this;
     }
