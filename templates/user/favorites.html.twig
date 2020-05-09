@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
-
+{% block title %}
+My favorites
+{% endblock %}
 {% block body %}
 	{{ include('_image_header.html.twig')}}
 	{% set products = user.products %}
