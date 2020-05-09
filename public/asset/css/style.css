@@ -887,6 +887,7 @@ tbody>tr:first-child>td {
         width: 100%;
         font-size: 0.8em;
         margin: auto;
+        margin-bottom: 4em;
     }
     .footer-nav-link {
         padding: 1.5em;
