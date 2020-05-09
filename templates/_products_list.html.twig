@@ -3,12 +3,11 @@
 	{% for product in products %}
 		<div class="col mb-4">
 			<div class="product-card">
-				{% set firstImage = product.pictures|first %}
-				{% if firstImage is same as(false)%}
-					<h2 class="">Nothing to see here... let's wait</h2>
-				{% else %}
-					<img src="../uploads/files/{{ firstImage.path }}" class="card-img-top product-img" alt="...">
-				{% endif %}
+				{% for picture in product.pictures %}
+					{% if picture.rank is same as(1) %}
+						<img src="{{ picture.path }}" class="card-img-top product-img" alt="...">
+					{% endif %}
+				{% endfor %}
 				<p class="product-price">{{ product.price }}
 					€
 
