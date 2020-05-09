@@ -786,15 +786,18 @@ tbody>tr:first-child>td {
         width: 226px;
         font-size: 40px;
     }
+    .home-picture {
+        height: 20em;
+    }
     .home-picture-title {
-        font-size: 20px;
-        padding-top: 3.5em;
+        font-size: 40px;
+        padding-top: 3em;
     }
     .home-picture-subtitle {
-        font-size: 15px;
+        font-size: 25px;
     }
     .dropdown {
-        font-size: 20px;
+        font-size: 40px;
     }
     .cards-container {
         padding: 0;
@@ -802,6 +805,9 @@ tbody>tr:first-child>td {
     }
     .product-card {
         padding: 1.5em;
+    }
+    .product-card-text {
+        font-size: 1.5em;
     }
     .mobile-product-price {
         display: inline;
