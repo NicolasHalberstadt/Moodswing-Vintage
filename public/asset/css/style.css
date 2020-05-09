@@ -801,7 +801,7 @@ tbody>tr:first-child>td {
         padding-top: 1em;
     }
     .product-card {
-        padding: 0;
+        padding: 1.5em;
     }
     .mobile-product-price {
         display: inline;
