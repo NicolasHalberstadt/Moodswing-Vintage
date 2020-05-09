@@ -802,8 +802,6 @@ tbody>tr:first-child>td {
     }
     .product-card {
         padding: 0;
-        width: 170px;
-        height: 200px;
     }
     .mobile-product-price {
         display: inline;
