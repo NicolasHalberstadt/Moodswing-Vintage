@@ -14,3 +14,7 @@
 	{% include('_image_header.html.twig') %}
 	{{ include('user/_signup_form.html.twig') }}
 {% endblock %}
+
+{% block javascripts %}
+	<script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
+{% endblock %}

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Form\UserUpdatePwdType;
 use App\Form\UserUpdateType;
+use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,26 +24,35 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+        $google_recaptcha_site_key = $this->getParameter('google_recaptcha_site_key');
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (isset($_POST['g-recaptcha-response'])) {
+                $secret = $this->getParameter('google_recatcha_secret');
+                $recaptcha = new ReCaptcha($secret);
+                $resp = $recaptcha->verify($_POST['g-recaptcha-response']);
 
-            $plainPassword = $form->get('plain_password')->getData();
-            $encodedPassword = $encoder->encodePassword($user, $plainPassword);
+                if ($resp->isSuccess()) {
+                    $plainPassword = $form->get('plain_password')->getData();
+                    $encodedPassword = $encoder->encodePassword($user, $plainPassword);
 
-            $user->setPassword($encodedPassword);
-            $user->setRole("ROLE_USER");
-            $user->setCreatedAt(new \DateTime());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+                    $user->setPassword($encodedPassword);
+                    $user->setRole("ROLE_USER");
+                    $user->setCreatedAt(new \DateTime());
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($user);
+                    $entityManager->flush();
 
-            $this->addFlash("success", "Your account has been successfully created");
-            return $this->redirectToRoute('app_login');
+                    $this->addFlash("success", "Your account has been successfully created");
+                    return $this->redirectToRoute('app_login');
+                }
+            }
         }
 
         return $this->render('user/signup.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'google_recaptcha_site_key' => $google_recaptcha_site_key
         ]);
     }
 

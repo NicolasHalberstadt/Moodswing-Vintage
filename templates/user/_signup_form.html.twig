@@ -8,6 +8,9 @@
 	{{ form_row(form.email, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.plain_password, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.legal_notice, {'attr': {'class': 'form-field'}}) }}
+	<hr>
+	<div class="g-recaptcha" data-sitekey={{ google_recaptcha_site_key }}></div>
+	<hr>
 	{{ form_row(form.signup, {'attr': {'class': 'form-button'}}) }}
 	{{ form_end(form) }}
 </div>
