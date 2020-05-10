@@ -2,23 +2,26 @@
 
 {% block title %}Contact form
 {% endblock %}
-
+{% block javascripts %}
+	<script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
+	<script>
+		function onSubmit(token) {
+document.getElementById("contact-form").submit();
+}
+	</script>
+{% endblock %}
 {% block body %}
 	{{ include('_image_header.html.twig')}}
 
-	{{ form_start(form)}}
+	{{ form_start(form, {'attr': {'id': 'contact-form'}})}}
 	<h1 class="form-title">Contact us</h1>
 	<hr>
 	{{ form_row(form.name, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.email, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.message, {'attr': {'class': 'form-field'}}) }}
-	<div class="g-recaptcha" data-sitekey={{ google_recaptcha_site_key }}></div>
+
 	<hr>
-	{{ form_row(form.send, {'attr': {'class': 'form-button'}}) }}
+	{{ form_row(form.send, {'attr': {'class': 'form-button g-recaptcha', 'data-sitekey': google_recaptcha_site_key, 'data-callback': 'onSubmit' }}) }}
 
 	{{ form_end(form) }}
-{% endblock %}
-
-{% block javascripts %}
- <script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
 {% endblock %}
