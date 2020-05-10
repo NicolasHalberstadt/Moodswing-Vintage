@@ -829,10 +829,10 @@ tbody>tr:first-child>td {
     .dropdown-content {
         border: 2px solid #FFB6C1;
         border-radius: 10px;
-        padding: 1.5em;
     }
     .dropdown-content a {
         padding-left: 20px;
+        padding-bottom: 0.5em;
     }
     .cards-container {
         padding: 0;
