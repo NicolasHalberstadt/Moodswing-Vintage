@@ -46,11 +46,6 @@ class UserType extends AbstractType
                 ]
 
             ])
-            ->add('legal_notice', CheckboxType::class, [
-                'label' => 'I acknowledge having read and understood the T & Cs and I accept them',
-                'required' => true,
-                'mapped' => false,
-            ])
             ->add('signup', SubmitType::class);
     }
 

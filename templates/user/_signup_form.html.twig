@@ -1,16 +1,18 @@
 <div class="form">
 
-	{{ form_start(form) }}
+	{{ form_start(form, {'attr': {'id': 'signup-form'}}) }}
 	<h1 class="form-title">Create Your account</h1>
 	<hr>
 	{{ form_row(form.firstname, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.lastname, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.email, {'attr': {'class': 'form-field'}}) }}
 	{{ form_row(form.plain_password, {'attr': {'class': 'form-field'}}) }}
-	{{ form_row(form.legal_notice, {'attr': {'class': 'form-field'}}) }}
+
 	<hr>
-	<div class="g-recaptcha" data-sitekey={{ google_recaptcha_site_key }}></div>
-	<hr>
-	{{ form_row(form.signup, {'attr': {'class': 'form-button'}}) }}
+	{{ form_row(form.signup, {'attr': {'class': 'form-button g-recaptcha', 'data-sitekey': google_recaptcha_site_key, 'data-callback': 'onSubmit' }}) }}
+	<p class="legal-acceptation">By clicking Register, you agree to Moodswing Vintage's
+		<a href="{{ path('legal_notice_en') }}">Terms of Use and Privacy Policy.</a>
+	</p>
 	{{ form_end(form) }}
+	
 </div>
