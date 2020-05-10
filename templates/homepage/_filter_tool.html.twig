@@ -6,14 +6,16 @@
 			everything
 		{% endif %}
 	</button>
+	{% set highCat = null %}
 	<div id="myDropdown" class="dropdown-content">
 		<a class="highlight-cat" href="
-				{% if category is defined %}
-					{{ path('products_by_category', {category_id: category.id}) }}
-				{% else %}
-						{{path('homepage')}}
-				{% endif %}">
-
+			{% if category is defined %}
+			{% set highCat = category %}
+				{{ path('products_by_category', {category_id: category.id}) }}
+			{% else %}
+					{{path('homepage')}}
+			{% endif %}">
+			
 			{% if category is defined %}
 				{{ category.name }}
 			{% else %}
@@ -23,9 +25,11 @@
 		{% if category is defined %}
 			<a class="dropdown-category" href="{{ path('homepage') }}">everything</a>
 		{% endif %}
-
+		<hr>
 		{% for category in categories %}
-			<a class="dropdown-category" href="{{ path('products_by_category', {category_id: category.id}) }}">{{ category.name }}</a>
+			{% if highCat is not same as (category) %}
+				<a class="dropdown-category" href="{{ path('products_by_category', {category_id: category.id}) }}">{{ category.name }}</a>
+			{% endif %}
 		{% endfor %}
 	</div>
 </div>
