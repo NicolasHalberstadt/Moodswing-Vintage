@@ -1,14 +1,15 @@
 {% extends "base.html.twig" %}
 {% block title %}
-My favorites
+	My favorites
 {% endblock %}
 {% block body %}
 	{{ include('_image_header.html.twig')}}
-	{% set products = user.products %}
-	{% include "_products_list.html.twig" %}
-    {% if products is empty %}
-    <h2>You don't have any favorites products for the moment, try adding one</h2>
-    {% endif %}
-    
+	<div class="card-container">
+		{% set products = user.products %}
+		{% include "_products_list.html.twig" %}
+		{% if products is empty %}
+			<h2 class="favorites-zero-favorites">Start adding favorites by clicking the little heart <i class="fas fa-heart" style="color:#FFC0C9"></i> on the product page</h2>
+		{% endif %}
+	</div>
 
 {% endblock %}
