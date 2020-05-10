@@ -189,4 +189,11 @@ class MainController extends AbstractController
     {
         return $this->render('legal/legal_en.html.twig');
     }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function about() {
+        return $this->render('about.html.twig');
+    }
 }
