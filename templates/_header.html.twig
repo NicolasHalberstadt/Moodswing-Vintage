@@ -8,7 +8,7 @@
 				<i class="fab fa-instagram"></i>
 			</a>
 			<a href="{{ path('contact') }}" class="home-socialbtn-email " title="Contact form">
-				<i class="home-socialbtn-email">&#x40;</i>
+				<i class="far fa-envelope"></i>
 			</a>
 
 			<div class="profile-dropdown">
@@ -32,14 +32,15 @@
 						<a href="/admin" {# class="home-socialsbtn-admin"#} class="profile-dropdown-content-link dropdown-admin" title="Admin pannel">
 							<i class="fa fa-tools"></i>admin
 						</a>
+						<hr>
 						<a href="{{ path('update_categories') }}" class="profile-dropdown-content-link dropdown-admin">
-							<i class="fa fa-tools"></i>update categories
+							<i class="fas fa-sync"></i>categories
 						</a>
 						<a href="{{ path('update_products') }}" class="profile-dropdown-content-link dropdown-admin">
-							<i class="fa fa-tools"></i>update products
+							<i class="fas fa-sync"></i>products
 						</a>
 						<a href="{{ path('update_pictures') }}" class="profile-dropdown-content-link dropdown-admin">
-							<i class="fa fa-tools"></i>update pictures
+							<i class="fas fa-sync"></i>pictures
 						</a>
 					{% endif %}
 				</div>
