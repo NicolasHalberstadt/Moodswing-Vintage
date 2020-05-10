@@ -35,7 +35,7 @@ class ContactController extends AbstractController
                         ->from('contactFormMail@gmail.com')
                         ->to('moodswingvintage@gmail.com')
                         ->subject('New Contact form request')
-                        ->text('You have a new contact request from ' . $contactFormData['name'] . ', ' . $contactFormData['email'] . ' saying : ' . $contactFormData['text'], 'text/plain');
+                        ->text('You have a new contact request from ' . $contactFormData['name'] . ', ' . $contactFormData['email'] . ' saying : ' . $contactFormData['message'], 'text/plain');
                     $mailer->send($email);
 
                     $this->addFlash('success', 'Your contact request has been sent');
