@@ -12,7 +12,12 @@
 		</div>
 	{% endif %}
 
-	<h1 class="h3 mb-3 form-title">Sign in</h1>
+	<div class="sign-in-buttons">
+		<h1 class="h3 mb-3 form-title">Sign in</h1>
+		<button class="signin-page-signup-btn h3 mb-3 form-title" type="submit">
+			<a class="login-form-signup-link" href="{{ path('app_signup') }}">Register</a>
+		</button>
+	</div>
 	<hr>
 	<label class="login-form-emailLabel" for="inputEmail">Email</label>
 	<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
@@ -21,20 +26,13 @@
 
 	<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-	<a href="{{ path('user_password_forgot') }}">
-		<p class="login-form-forgot-password">Forgot your password ?</p>
+	<a class="login-form-forgot-password" href="{{ path('user_password_forgot') }}">
+		<p>Forgot your password ?</p>
 	</a>
-
-	<hr>
-
-	<p class="signup-text">You don't have an account ? Create one
-		<a class="login-form-signup-link" href="{{ path('app_signup') }}">here</a>
-	</p>
-
 
 	<div class="checkbox mb-3">
 		<label class="remember-me-text">
-			<input type="checkbox" name="_remember_me" >
+			<input type="checkbox" name="_remember_me">
 			Remember me
 			<span class="remember-small-text">(Don't use this option on shared or public device)</span>
 		</label>
