@@ -1,7 +1,20 @@
 {% extends "base.html.twig" %}
+{% block meta %}
+	<meta name="description" content="Everything you need to know about Moodswing Vintage">
+{% endblock %}
 {% block title %}
-	About
+	About Moodswing Vintage
 {% endblock %}
 {% block body %}
-	<h2>This part is coming....</h2>
+	{% include "_image_header.html.twig" %}
+	<div class="about-container">
+		<h2>Everything you need to know about us</h2>
+		<p>Vintage clothing, accessories and decor!
+			<br>More on Instagram with the hashtag #moodswingvintage 💖
+			<br>All sales are on Etsy.
+			<br>Don’t hesitate to contact me for informations or measurements on any product!
+			<br>Please consider that due to their second hand origin, items can presents some imperfection.
+			<br>All bubble wraps used in packages are reused bubble wraps, not bought specifically for your order 😊 do not hesitate to use them a third time!
+			<br>Once the parcel is shipped, I am no longer responsible for lost.</p>
+	</div>
 {% endblock %}
