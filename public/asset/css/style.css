@@ -68,7 +68,7 @@ hr {
     background-color: white;
     width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    z-index: 3;
     border-radius: 5px;
     right: 0;
 }
@@ -174,7 +174,7 @@ a.home-socialbtn-email,
     padding-left: 10px;
     background-color: white;
     box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.082);
-    border-radius: 5px;
+    border-radius: 10px;
     z-index: 2;
     border: none;
     font-size: 0.8em;
@@ -185,7 +185,8 @@ a.home-socialbtn-email,
 /* Dropdown button on hover & focus */
 
 .dropbtn:hover {
-    box-shadow: inset 0px 0px 0px 2px #FFB6C1;
+    transition: 1s;
+    box-shadow: inset 0px 0px 2px 2px #FFB6C1;
     border-radius: 5px;
     outline: none;
 }
@@ -247,7 +248,7 @@ a.home-socialbtn-email,
     display: none;
     position: absolute;
     background-color: white;
-    box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.082);
+    box-shadow: 0px 0px 16px 5px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     z-index: 2;
     overflow: scroll;
@@ -263,6 +264,11 @@ a.home-socialbtn-email,
     display: block;
     width: 100%;
     text-align: center;
+    padding-top: 0.5em;
+}
+
+.dropdown-content a:last-child {
+    padding-bottom: 0.5em;
 }
 
 
@@ -605,13 +611,14 @@ label.required::after {
     font-size: 2em;
     margin-bottom: 1rem;
     background-color: inherit;
-    border: 2px solid black;
+    border: 2px dotted black;
     border-radius: 15px;
     width: 126px;
 }
 
 .signin-page-signup-btn:hover {
-    border-color: lightgray;
+    border-color: rgb(158, 157, 157);
+    border: 2px solid black;
 }
 
 .remember-me-text {
@@ -639,7 +646,7 @@ label.required::after {
 }
 
 .login-form-forgot-password {
-    color: rgba(247, 188, 198);
+    color: rgb(214, 163, 171);
     text-decoration: underline;
     font-size: 1em;
     font-weight: 300;
@@ -808,6 +815,22 @@ tbody>tr:first-child>td {
         padding-right: 15px;
         padding-left: 15px;
     }
+}
+
+@media (min-width: 375px) and (max-width: 575px) {
+    .container-fluid {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
+
+@media (min-width: 373px) and (max-width: 504px) {
+    .user-details-button {
+        padding: 0.8em!important;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 575px) {
     .home-picture-title {
         font-size: 2em;
         padding-left: 0.3em;
@@ -818,16 +841,31 @@ tbody>tr:first-child>td {
     .signin-page-signup-btn {
         margin-right: -1em;
     }
-}
-
-@media (min-width: 375px) and (max-width: 575px) {
-    .container-fluid {
-        padding-right: 10px;
-        padding-left: 10px;
+    .user-card {
+        width: 100%;
+        padding-top: 3em;
     }
-}
-
-@media (min-width: 320px) and (max-width: 575px) {
+    .user-details-table {
+        padding: 0;
+    }
+    table {
+        border: 1px solid black!important;
+    }
+    .table td {
+        padding: 0.2em;
+    }
+    .user-details-button-link {
+        width: 100%;
+        padding: 0.3em;
+    }
+    .user-details-button {
+        width: 100%;
+        padding: 0.2em;
+    }
+    .favorites-zero-favorites {
+        margin-bottom: 0;
+        padding-top: 0
+    }
     .content-wrap {
         min-height: calc(100vh - 61px - 56px);
     }
@@ -848,7 +886,7 @@ tbody>tr:first-child>td {
     }
     .home-socialsbtn i,
     .home-homebtn a {
-        font-size: 30px;
+        font-size: 40px;
     }
     a.home-socials-btn-instagram,
     a.home-socialbtn-email,
@@ -859,7 +897,7 @@ tbody>tr:first-child>td {
         width: unset;
     }
     .profile-dropdown-content {
-        width: 207px;
+        width: 228px;
         font-size: 40px;
     }
     .home-picture-title {
@@ -874,7 +912,7 @@ tbody>tr:first-child>td {
         font-size: 1.2em;
     }
     .dropdown-content a {
-        padding-top: 0.5em;
+        padding-top: 1em;
     }
     .dropdown-content a:last-child {
         padding-bottom: 0.5em;
@@ -918,6 +956,21 @@ tbody>tr:first-child>td {
         width: 4.5em;
         height: 2.5em;
     }
+    .details-product {
+        margin: auto;
+        padding: 0.5em;
+        width: 100%;
+    }
+    .details-image-carousel {
+        width: 100%;
+    }
+    .details-text {
+        width: 100%;
+        padding-left: 0;
+    }
+    .legal-container {
+        padding: 0.5em;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 991.98px) {
@@ -929,7 +982,7 @@ tbody>tr:first-child>td {
         padding: 2em;
     }
     .home-homebtn a {
-        margin-left: 2.9em;
+        margin-left: 4.5em;
         font-size: 40px;
     }
     .home-socialsbtn {
@@ -937,13 +990,13 @@ tbody>tr:first-child>td {
         padding-right: 10px;
     }
     .home-socialsbtn i {
-        font-size: 40px;
+        font-size: 50px;
     }
     .home-socials-btn-instagram {
         width: unset;
     }
     .profile-dropdown-content {
-        width: 230px;
+        width: 250px;
         font-size: 40px;
     }
     .home-picture {
@@ -965,7 +1018,9 @@ tbody>tr:first-child>td {
         border-radius: 10px;
     }
     .dropdown-content a {
-        padding-left: 20px;
+        padding-top: 0.5em;
+    }
+    .dropdown-content a:last-child {
         padding-bottom: 0.5em;
     }
     .cards-container {
@@ -1040,7 +1095,6 @@ tbody>tr:first-child>td {
     form {
         width: 90%;
         margin-top: 15em;
-        margin-bottom: -2px;
     }
     .legal-acceptation {
         font-size: 25px;
@@ -1049,6 +1103,12 @@ tbody>tr:first-child>td {
         font-size: 35px;
     }
     /* Login form */
+    .signin-page-signup-btn {
+        font-size: 0.6em;
+        padding: 0;
+        width: 4em;
+        height: 2em;
+    }
     .form-title {
         font-weight: 300;
         font-size: 60px;
@@ -1063,7 +1123,7 @@ tbody>tr:first-child>td {
         font-size: 50px;
     }
     .login-form-forgot-password {
-        font-size: 33px;
+        font-size: 35px;
     }
     .remember-me-text {
         font-size: 30px;
@@ -1071,19 +1131,25 @@ tbody>tr:first-child>td {
     /* User details */
     .user-card {
         font-size: 45px;
-        padding-top: 8.5em;
-        width: 85%;
+        width: 100%;
+        padding-top: 2em;
+        margin-bottom: 2em;
     }
     .user-details-name {
         font-size: 1em;
     }
     .user-details-table {
         font-size: 0.8em;
+        padding: 0;
     }
     .table {
         margin-bottom: 0;
         border: 1px solid rgb(80, 79, 79);
         border-collapse: unset;
+    }
+    .table td {
+        padding: 0.2em;
+        font-size: 0.6em;
     }
     .user-details-button {
         font-size: 0.8em;
@@ -1098,10 +1164,9 @@ tbody>tr:first-child>td {
     }
 }
 
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media(min-width: 670px) and (max-width: 991.98px) {
     .user-card {
         width: 70%;
-        margin-top: 8em;
     }
 }
 
@@ -1140,6 +1205,10 @@ tbody>tr:first-child>td {
 @media (min-width: 1200px) {
     .home-homebtn a {
         margin-left: 5.5em;
+    }
+    .cards-container {
+        width: 90%;
+        margin: auto;
     }
     .details-product {
         font-size: 1.2em;
