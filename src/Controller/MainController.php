@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\Response;
+use Y0lk\OAuth1\Client\Server\Etsy;
 
 class MainController extends AbstractController
 {
@@ -68,7 +68,7 @@ class MainController extends AbstractController
 
     /**
      * @Route("/categories/update", name="update_categories")
-     * 
+     * @IsGranted("ROLE_ADMIN")
      */
     public function updateCategories(CategoryRepository $categoryRepo)
     {
@@ -99,17 +99,33 @@ class MainController extends AbstractController
      */
     public function updateProducts(ProductRepository $productRepo, CategoryRepository $categoryRepo)
     {
+        // // Solution 1 : vider bdd et re-remplir BOF BOF
+        // $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
+       
+        // foreach ($products as $product) {
+        //     $manager->remove($product);
+        // }
+
         $client = HttpClient::create();
         $apiKey = "2bqddccebry4nblkj11o6ugv";
         // get all the products from the shop
         $apiProductsResponse = $client->request('GET', 'https://openapi.etsy.com/v2/shops/moodswingvintage/listings/active?includes=MainImage&limit=70&api_key=' . $apiKey)->toArray();
         $apiProducts = $apiProductsResponse['results'];
 
+        $manager = $this->getDoctrine()->getManager();
         // PRODUCTS
+        $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
+       
         foreach ($apiProducts as $apiProduct) {
+            // Solution 2 : prendre tous les produits -> comparer titre avec résultats api -> si false -> suppr from bdd
+            foreach ($products as $product) {
+                $productName = $product->getName();
+                if ($productName !== $apiProduct['title']) {
+                    $manager->remove($product);
+                }
+            }
             // does the product already exists in db ?
             $product = $productRepo->findOneBy(['etsy_id' => $apiProduct['listing_id']]);
-
 
             if ($product !== null) {
                 // update info
@@ -132,7 +148,7 @@ class MainController extends AbstractController
                 $product->setCategory($category);
             }
             // make get request to get all pictures from product
-            $manager = $this->getDoctrine()->getManager();
+
             $manager->persist($product);
             $manager->flush();
         }
@@ -167,7 +183,6 @@ class MainController extends AbstractController
                     $manager->flush();
                 }
             }
-           
         }
         $this->addFlash('success', 'The pictures have been updated');
         return $this->redirectToRoute('homepage');
@@ -193,7 +208,8 @@ class MainController extends AbstractController
     /**
      * @Route("/about", name="about")
      */
-    public function about() {
+    public function about()
+    {
         return $this->render('about.html.twig');
     }
 }
