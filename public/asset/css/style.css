@@ -172,11 +172,11 @@ a.home-socialbtn-email,
     color: black;
     padding: 6px;
     padding-left: 10px;
-    font-size: 16px;
+    background-color: white;
+    box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.082);
+    border-radius: 5px;
+    z-index: 2;
     border: none;
-    cursor: pointer;
-    border: solid transparent;
-    background: none;
     font-size: 0.8em;
     width: 9em;
 }
@@ -185,7 +185,7 @@ a.home-socialbtn-email,
 /* Dropdown button on hover & focus */
 
 .dropbtn:hover {
-    border: solid #FFB6C1;
+    box-shadow: inset 0px 0px 0px 2px #FFB6C1;
     border-radius: 5px;
     outline: none;
 }
@@ -259,11 +259,9 @@ a.home-socialbtn-email,
 .dropdown-content a {
     color: black;
     font-size: 0.8em;
-    padding: 6px;
-    padding-left: 10px;
     text-decoration: none;
     display: block;
-    width: 8em;
+    width: 100%;
     text-align: center;
 }
 
@@ -296,7 +294,6 @@ a.home-socialbtn-email,
 
 .mb-4 {
     margin-bottom: 1em!important;
-    border-radius: 5px;
 }
 
 .product-card {
@@ -784,7 +781,144 @@ tbody>tr:first-child>td {
 }
 
 
+/* About */
+
+.about-container {
+    padding: 2em;
+}
+
+.about-container h2 {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 300;
+    padding: 1em;
+}
+
+.about-container p {
+    font-size: 1.5;
+    font-weight: 300;
+    padding-top: 1em;
+}
+
+
 /* MEDIA */
+
+@media (min-width: 320px) and (max-width: 375px) {
+    .container-fluid {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .home-picture-title {
+        font-size: 2em;
+        padding-left: 0.3em;
+    }
+    form {
+        width: 100%!important;
+    }
+    .signin-page-signup-btn {
+        margin-right: -1em;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 575px) {
+    .container-fluid {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 575px) {
+    .content-wrap {
+        min-height: calc(100vh - 61px - 56px);
+    }
+    .home-homebtn {
+        margin: 0 0;
+    }
+    .home-homebtn a {
+        margin-left: 0;
+    }
+    .home-socialsbtn {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    .home-socialsbtn i,
+    .profile-dropdown {
+        padding: 0.2em;
+    }
+    .home-socialsbtn i,
+    .home-homebtn a {
+        font-size: 30px;
+    }
+    a.home-socials-btn-instagram,
+    a.home-socialbtn-email,
+    .home-socialsbtn-profile>i {
+        padding: unset;
+    }
+    .home-socials-btn-instagram {
+        width: unset;
+    }
+    .profile-dropdown-content {
+        width: 207px;
+        font-size: 40px;
+    }
+    .home-picture-title {
+        font-size: 2em;
+        padding-top: 2em;
+    }
+    .home-picture-subtitle {
+        font-size: 1.2em;
+    }
+    .dropbtn,
+    .dropdown-content a {
+        font-size: 1.2em;
+    }
+    .dropdown-content a {
+        padding-top: 0.5em;
+    }
+    .dropdown-content a:last-child {
+        padding-bottom: 0.5em;
+    }
+    .row {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .mb-4 {
+        padding: 8px;
+    }
+    .product-card {
+        height: 152px;
+    }
+    .card-img-top {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    .etsy-button,
+    .product-price {
+        display: none;
+    }
+    .card-title {
+        font-size: 1.5em;
+        text-align: left;
+        width: 100%;
+        font-weight: 200;
+    }
+    .mobile-product-price {
+        display: inline;
+        font-size: 1.5em;
+        padding-top: 0.3em;
+    }
+    form {
+        width: 90%;
+        font-size: 20px;
+    }
+    .signin-page-signup-btn {
+        font-size: 1em;
+        padding: 0.1em;
+        width: 4.5em;
+        height: 2.5em;
+    }
+}
 
 @media (min-width: 576px) and (max-width: 991.98px) {
     .content-wrap {
@@ -893,12 +1027,12 @@ tbody>tr:first-child>td {
         padding: 0;
     }
     /*.slideshow-container {
-        min-height: 455px;
-    }
-    .product-details-image {
-        min-height: 100%;
-        max-height: 455px;
-    }*/
+    min-height: 455px;
+}
+.product-details-image {
+    min-height: 100%;
+    max-height: 455px;
+}*/
     .details-etsy-buy {
         margin-bottom: 2em;
     }
