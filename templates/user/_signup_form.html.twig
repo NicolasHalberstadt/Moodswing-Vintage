@@ -9,7 +9,7 @@
 	{{ form_row(form.plain_password, {'attr': {'class': 'form-field'}}) }}
 
 	<hr>
-	{{ form_row(form.signup, {'attr': {'class': 'form-button g-recaptcha', 'data-sitekey': google_recaptcha_site_key, 'data-callback': 'onSubmit' }}) }}
+	{{ form_row(form.register, {'attr': {'class': 'form-button g-recaptcha', 'data-sitekey': google_recaptcha_site_key, 'data-callback': 'onSubmit' }}) }}
 	<p class="legal-acceptation">By clicking Register, you agree to Moodswing Vintage's
 		<a href="{{ path('legal_notice_en') }}">Terms of Use and Privacy Policy.</a>
 	</p>
