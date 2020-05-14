@@ -152,6 +152,7 @@ class MainController extends AbstractController
             $manager->persist($product);
             $manager->flush();
         }
+        $this->updatePictures();
         $this->addFlash('success', 'The products have been updated');
         return $this->redirectToRoute('homepage');
     }
@@ -159,8 +160,10 @@ class MainController extends AbstractController
     /**
      * @Route("/pictures/update", name="update_pictures")
      */
-    public function updatePictures(PictureRepository $pictureRepo, ProductRepository $productRepo)
+    public function updatePictures()
     {
+        $productRepo = $this->getDoctrine()->getRepository(Product::class);
+        $pictureRepo = $this->getDoctrine()->getRepository(Picture::class);
         $client = HttpClient::create();
         $apiKey = "2bqddccebry4nblkj11o6ugv";
         $products = $productRepo->findAll();
@@ -184,8 +187,8 @@ class MainController extends AbstractController
                 }
             }
         }
-        $this->addFlash('success', 'The pictures have been updated');
-        return $this->redirectToRoute('homepage');
+        // $this->addFlash('success', 'The pictures have been updated');
+        // return $this->redirectToRoute('homepage');
     }
 
 
