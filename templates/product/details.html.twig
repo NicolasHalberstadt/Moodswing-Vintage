@@ -1,6 +1,9 @@
 {% extends "base.html.twig" %}
+{% block meta %}
+	<meta name="description" content="{{ product.description }}">
+{% endblock %}
 {% block title %}
-{{ product.name }}
+	{{ product.name }}
 {% endblock %}
 {% block body %}
 	<div class="details-product">
@@ -33,36 +36,40 @@
 
 {% endblock %}
 {% block javascripts %}
-<script>
-var slideIndex = 1;
+	<script>
+		var slideIndex = 1;
 showSlides(slideIndex);
 
 function plusSlides(n) {
-    showSlides(slideIndex += n);
+showSlides(slideIndex += n);
 }
 
 function currentSlide(n) {
-    showSlides(slideIndex = n);
+showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("slide-element");
-    var dots = document.getElementsByClassName("dot");
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
+var i;
+var slides = document.getElementsByClassName("slide-element");
+var dots = document.getElementsByClassName("dot");
+if (n > slides.length) {
+slideIndex = 1
+}
+if (n < 1) {
+slideIndex = slides.length
+}
+for (i = 0; i < slides.length; i++) {
+slides[i].style.display = "none";
+}
+for (i = 0; i < dots.length; i++) {
+dots[i].className = dots[i].className.replace(" active", "");
+}
+slides[slideIndex - 1].style.display = "block";
+dots[slideIndex - 1].className += " active";
 }
 
-$('#myModal').on('shown.bs.modal', function() {
-    $('#myInput').trigger('focus')
+$('#myModal').on('shown.bs.modal', function () {
+$('#myInput').trigger('focus')
 })
-</script>
+	</script>
 {% endblock %}
