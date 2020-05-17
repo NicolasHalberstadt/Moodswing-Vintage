@@ -69,7 +69,7 @@ hr {
     width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 3;
-    border-radius: 5px;
+    border-radius: 15px;
     right: 0;
 }
 
@@ -121,7 +121,7 @@ a.home-socialbtn-email,
 .profile-dropdown-content>a:hover i {
     color: rgb(180, 206, 179);
     font-weight: 800;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .profile-dropdown-content>a,
@@ -422,12 +422,15 @@ a.home-socialbtn-email,
     width: 50%;
 }
 
+.slideshow-element-dot {
+    text-align: center;
+}
+
 
 /* Slideshow container */
 
 .slideshow-container {
     max-height: 535px;
-    position: relative;
     margin: auto;
 }
 
@@ -437,13 +440,14 @@ a.home-socialbtn-email,
 .slide-element {
     display: none;
     text-align: center;
+    position: relative;
 }
 
 
 /* Next & previous buttons */
 
 .prev {
-    padding-left: 16px;
+    left: 0;
 }
 
 .next {
@@ -523,7 +527,7 @@ a.home-socialbtn-email,
 .details-etsy-buy {
     text-align: center;
     display: inline-block;
-    border-radius: 8px;
+    border-radius: 15px;
     background-color: rgba(247, 188, 198, 0.637);
     width: 100%;
     padding: 0.6em;
@@ -582,7 +586,7 @@ label.required::after {
 .form-button {
     background-color: rgba(247, 188, 198);
     margin-top: 1em;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .form-button:hover {
@@ -838,8 +842,29 @@ tbody>tr:first-child>td {
     form {
         width: 100%!important;
     }
-    .signin-page-signup-btn {
-        margin-right: -1em;
+    label {
+        font-size: 1.5em;
+    }
+    .form-control {
+        font-size: 1em!important;
+    }
+    /* Remember-me checkbox */
+    .custom-control {
+        display: block;
+        height: 15em;
+    }
+    .custom-control-input {
+        margin-right: 1em;
+    }
+    .custom-control-label {
+        margin-left: .5em!important;
+        font-size: 30px;
+    }
+    .custom-control-label::before,
+    .custom-control-label::after {
+        width: 1em!important;
+        height: 1em!important;
+        left: -1.2em;
     }
     .user-card {
         width: 100%;
@@ -968,6 +993,15 @@ tbody>tr:first-child>td {
         width: 100%;
         padding-left: 0;
     }
+    .details-title {
+        font-size: 50px;
+    }
+    .details-price {
+        font-size: 50px;
+    }
+    .details-description {
+        font-size: 45px;
+    }
     .legal-container {
         padding: 0.5em;
     }
@@ -993,7 +1027,7 @@ tbody>tr:first-child>td {
         font-size: 50px;
     }
     .home-socials-btn-instagram {
-        width: unset;
+        width: 59px;
     }
     .profile-dropdown-content {
         width: 250px;
@@ -1074,6 +1108,11 @@ tbody>tr:first-child>td {
         margin: auto;
         display: block;
         padding: 1.5em;
+        padding-top: 3em;
+    }
+    .prev,
+    .next {
+        font-size: 60px;
     }
     .details-image-carousel,
     .details-text {
@@ -1081,14 +1120,46 @@ tbody>tr:first-child>td {
         width: 100%;
         padding: 0;
     }
-    /*.slideshow-container {
-    min-height: 455px;
-}
-.product-details-image {
-    min-height: 100%;
-    max-height: 455px;
-}*/
+    .slideshow-container {
+        min-height: 60em;
+        margin-bottom: -1.5em;
+    }
+    .product-details-image {
+        max-width: 100%;
+        min-height: 800px;
+    }
+    .slideshow-element-dot {
+        padding-top: 2em;
+    }
+    .dot {
+        margin-left: 1em;
+        height: 25px;
+        width: 25px;
+    }
+    .details-text {
+        padding: 0 2em;
+    }
+    .details-title {
+        font-size: 60px;
+    }
+    .product-details-favored,
+    .product-details-not-favored {
+        font-size: 60px;
+    }
+    .details-price {
+        margin-top: 0;
+        font-size: 60px;
+        padding-bottom: 1em;
+    }
+    .details-description {
+        font-size: 55px;
+    }
     .details-etsy-buy {
+        display: block;
+        margin: auto;
+        width: 50%;
+        font-size: 45px;
+        font-weight: 600;
         margin-bottom: 2em;
     }
     /* Forms */
@@ -1113,6 +1184,10 @@ tbody>tr:first-child>td {
         font-weight: 300;
         font-size: 60px;
     }
+    #inputEmail,
+    #inputPassword {
+        font-size: 35px;
+    }
     .login-form-emailLabel,
     .login-form-passwordLabel,
     .signup-text,
@@ -1127,6 +1202,23 @@ tbody>tr:first-child>td {
     }
     .remember-me-text {
         font-size: 30px;
+    }
+    /* Remember-me checkbox */
+    .custom-control {
+        height: 164px;
+    }
+    .custom-control-input {
+        margin-right: 1em;
+    }
+    .custom-control-label {
+        margin-left: 1.5em!important;
+        font-size: 35px;
+    }
+    .custom-control-label::before,
+    .custom-control-label::after {
+        width: 1.5em!important;
+        height: 1.5em!important;
+        left: -2em;
     }
     /* User details */
     .user-card {
