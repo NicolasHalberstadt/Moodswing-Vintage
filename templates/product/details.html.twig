@@ -6,6 +6,7 @@
 	{{ product.name }}
 {% endblock %}
 {% block body %}
+<hr>
 	<div class="details-product">
 		<div class="details-image-carousel">
 			{{ include("product/_carousel.html.twig") }}
@@ -13,7 +14,7 @@
 		<div class="details-text">
 			<h2 class="details-title">{{ product.name }}</h2>
 
-			{% if user is not null %}
+
 				{% set users = product.users %}
 				{% if user in users %}
 					<a class="product-details-favored" href="{{ path('user_favorite_remove' , {'product_id': product.id}) }}" title="Remove from my favorites">
@@ -24,7 +25,7 @@
 						<i class="far fa-heart"></i>
 					</a>
 				{% endif %}
-			{% endif %}
+
 
 			<h4 class="details-price">{{  product.price }}€</h4>
 			<a target="_blank" class="details-etsy-buy" href="{{ product.etsyLink }}">
