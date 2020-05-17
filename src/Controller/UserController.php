@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class UserController extends AbstractController
 {
@@ -144,14 +145,13 @@ class UserController extends AbstractController
 
     /**
      * @Route("user/favorite/{product_id}/add", name="user_favorite_add")
+     * @isGranted("ROLE_USER")
      */
     public function favoriteAdd($product_id)
     {
-
         $product = $this->getDoctrine()->getRepository(Product::class)->find($product_id);
-
+        $user = $this->getUser();
         if ($product) {
-            $user = $this->getUser();
             $user->addProduct($product);
             $product->addUser($user);
 
