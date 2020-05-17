@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Y0lk\OAuth1\Client\Server\Etsy;
 
 class MainController extends AbstractController
 {
@@ -187,8 +186,6 @@ class MainController extends AbstractController
                 }
             }
         }
-        // $this->addFlash('success', 'The pictures have been updated');
-        // return $this->redirectToRoute('homepage');
     }
 
 
