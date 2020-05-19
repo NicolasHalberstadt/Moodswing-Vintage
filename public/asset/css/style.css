@@ -1005,6 +1005,15 @@ tbody>tr:first-child>td {
     .legal-container {
         padding: 0.5em;
     }
+    .legal-container h2 {
+        font-size: 50px;
+    }
+    .legal-container h3 {
+        font-size: 35px;
+    }
+    .legal-container p {
+        font-size: 25px;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 991.98px) {
@@ -1231,25 +1240,34 @@ tbody>tr:first-child>td {
         font-size: 1em;
     }
     .user-details-table {
-        font-size: 0.8em;
+        font-size: 0.6em;
         padding: 0;
     }
     .table {
         margin-bottom: 0;
-        border: 1px solid rgb(80, 79, 79);
+        border: 2px solid rgb(80, 79, 79);
         border-collapse: unset;
     }
     .table td {
         padding: 0.2em;
-        font-size: 0.6em;
+        font-size: 1em;
     }
     .user-details-button {
         font-size: 0.8em;
         margin: 0.2em;
     }
+    .legal-container h2 {
+        font-size: 70px;
+    }
+    .legal-container h3 {
+        font-size: 55px;
+    }
+    .legal-container p {
+        font-size: 45px;
+    }
     /* Footer */
     .footer {
-        font-size: 40px;
+        font-size: 50px;
     }
     .footer-nav-link {
         padding: 1em;
