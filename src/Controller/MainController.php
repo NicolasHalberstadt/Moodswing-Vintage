@@ -57,6 +57,10 @@ class MainController extends AbstractController
     public function productDetails(int $product_id)
     {
         $product = $this->getDoctrine()->getRepository(Product::class)->find($product_id);
+        if ($product === null ) {
+            $this->addFlash('warning','The product could not be found, it may have been sold or not online anymore.');
+            return $this->redirectToRoute('homepage');
+        }
         $user = $this->getUser();
 
         return $this->render('product/details.html.twig', [
@@ -89,7 +93,7 @@ class MainController extends AbstractController
                 $em->flush();
             }
         }
-        $this->addFlash('success', 'THe categories have been updated');
+        $this->addFlash('success', 'The categories have been updated');
         return $this->redirectToRoute('homepage');
     }
 
