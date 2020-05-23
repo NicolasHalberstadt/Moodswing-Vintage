@@ -911,7 +911,7 @@ tbody>tr:first-child>td {
     }
     .home-socialsbtn i,
     .home-homebtn a {
-        font-size: 40px;
+        font-size: 30px;
     }
     a.home-socials-btn-instagram,
     a.home-socialbtn-email,
@@ -997,6 +997,7 @@ tbody>tr:first-child>td {
         font-size: 50px;
     }
     .details-price {
+        margin-bottom: 0;
         font-size: 50px;
     }
     .details-description {
@@ -1013,6 +1014,20 @@ tbody>tr:first-child>td {
     }
     .legal-container p {
         font-size: 25px;
+    }
+    .about-container {
+        padding: 0;
+        width: 90%;
+        margin: auto;
+    }
+    .about-container h2 {
+        font-size: 40px;
+        padding: 0;
+        padding-top: 1em;
+    }
+    .about-container p {
+        font-size: 20px;
+        font-weight: 200;
     }
 }
 
@@ -1264,6 +1279,19 @@ tbody>tr:first-child>td {
     }
     .legal-container p {
         font-size: 45px;
+    }
+    .about-container {
+        padding: 0;
+        width: 95%;
+    }
+    .about-container h2 {
+        font-size: 40px;
+        padding: 0;
+        padding-top: 1em;
+    }
+    .about-container p {
+        font-size: 20px;
+        font-weight: 200;
     }
     /* Footer */
     .footer {
