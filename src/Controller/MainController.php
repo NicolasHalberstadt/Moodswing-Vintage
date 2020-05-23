@@ -95,6 +95,7 @@ class MainController extends AbstractController
 
     /**
      * @Route("/products/update", name="update_products")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function updateProducts(ProductRepository $productRepo, CategoryRepository $categoryRepo)
     {
@@ -158,6 +159,7 @@ class MainController extends AbstractController
 
     /**
      * @Route("/pictures/update", name="update_pictures")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function updatePictures()
     {
