@@ -59,6 +59,11 @@ class Picture
      */
     private $rank;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $homepagePath;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -158,6 +163,18 @@ class Picture
     public function setRank(int $rank): self
     {
         $this->rank = $rank;
+
+        return $this;
+    }
+
+    public function getHomepagePath(): ?string
+    {
+        return $this->homepagePath;
+    }
+
+    public function setHomepagePath(string $homepagePath): self
+    {
+        $this->homepagePath = $homepagePath;
 
         return $this;
     }

@@ -5,7 +5,7 @@
 			<div class="product-card">
 				{% for picture in product.pictures %}
 					{% if picture.rank is same as(1) %}
-						<img src="{{ picture.path }}" class="card-img-top product-img" alt="...">
+						<img src="{{ picture.homepagePath }}" class="card-img-top product-img" alt="...">
 					{% endif %}
 				{% endfor %}
 				<p class="product-price">{{ product.price }}

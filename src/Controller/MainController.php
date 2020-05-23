@@ -175,6 +175,7 @@ class MainController extends AbstractController
 
                 if ($productPicture === null) {
                     $picture = new Picture();
+                    $picture->setHomepagePath($apiProductPicture['url_570xN']);
                     $picture->setPath($apiProductPicture['url_fullxfull']);
                     $picture->setEtsyId($apiProductPicture['listing_image_id']);
                     $picture->setCreatedAt(new \DateTime());
