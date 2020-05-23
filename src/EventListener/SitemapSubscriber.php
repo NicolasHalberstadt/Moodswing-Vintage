@@ -55,7 +55,7 @@ class SitemapSubscriber implements EventSubscriberInterface
             $images = $product->getPictures();
             $decoratedUrl = new GoogleImageUrlDecorator($url);
             foreach ($images as $image) {
-                $decoratedUrl->addImage(new GoogleImage("/uploads/files/" . $image->getPath()));
+                $decoratedUrl->addImage(new GoogleImage($image->getPath()));
             }
             $urls->addUrl($decoratedUrl, 'product');
         }
