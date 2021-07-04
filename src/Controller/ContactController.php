@@ -21,11 +21,11 @@ class ContactController extends AbstractController
     {
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
-        $google_recaptcha_site_key = $this->getParameter('google_recaptcha_site_key');
+        $google_recaptcha_site_key = $this->getParameter('app.google_recaptcha_site_key');
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (isset($_POST['g-recaptcha-response'])) {
-                $secret = $this->getParameter('google_recatcha_secret');
+                $secret = $this->getParameter('app.google_recatcha_secret');
                 $recaptcha = new ReCaptcha($secret);
                 $resp = $recaptcha->verify($_POST['g-recaptcha-response']);
 

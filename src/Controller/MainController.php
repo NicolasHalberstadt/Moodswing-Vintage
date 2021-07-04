@@ -24,15 +24,22 @@ class MainController extends AbstractController
         $categories = $categoryRepo->findAll();
         $products = $productRepo->findAll();
         $user = $this->getUser();
-
-        // send them to homepage
-        return $this->render('homepage/index.html.twig', [
-            'products' => $products,
-            'categories' => $categories,
-            'user' => $user
-        ]);
+        
+        $response = $this->render(
+            'homepage/index.html.twig',
+            [
+                'products' => $products,
+                'categories' => $categories,
+                'user' => $user,
+            ]
+        );
+        
+        $response->setPublic();
+        $response->setMaxAge(3600);
+        
+        return $response;
     }
-
+    
     /**
      * @Route("/category/{category_id}", name="products_by_category")
      */
@@ -42,47 +49,56 @@ class MainController extends AbstractController
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
         $user = $this->getUser();
-
-        return $this->render('homepage/index.html.twig', [
-            'category' => $category,
-            'categories' => $categories,
-            'products' => $products,
-            'user' => $user
-        ]);
+        
+        return $this->render(
+            'homepage/index.html.twig',
+            [
+                'category' => $category,
+                'categories' => $categories,
+                'products' => $products,
+                'user' => $user,
+            ]
+        );
     }
-
+    
     /**
      * @Route("/product/{product_id}", name="product_details")
      */
     public function productDetails(int $product_id)
     {
         $product = $this->getDoctrine()->getRepository(Product::class)->find($product_id);
-        if ($product === null ) {
-            $this->addFlash('warning','The product could not be found, it may have been sold or not online anymore.');
+        if ($product === null) {
+            $this->addFlash('warning', 'The product could not be found, it may have been sold or not online anymore.');
+            
             return $this->redirectToRoute('homepage');
         }
         $user = $this->getUser();
-
-        return $this->render('product/details.html.twig', [
-            'product' => $product,
-            'user' => $user
-        ]);
+        
+        return $this->render(
+            'product/details.html.twig',
+            [
+                'product' => $product,
+                'user' => $user,
+            ]
+        );
     }
-
+    
     /**
      * @Route("/categories/update", name="update_categories")
      * @IsGranted("ROLE_ADMIN")
      */
     public function updateCategories(CategoryRepository $categoryRepo)
     {
-
+        
         $client = HttpClient::create();
         $apiKey = "2bqddccebry4nblkj11o6ugv";
-        $apiResponse = $client->request('GET', 'https://openapi.etsy.com/v2/shops/moodswingvintage/sections?api_key=' . $apiKey)->toArray();
+        $apiResponse =
+            $client->request('GET', 'https://openapi.etsy.com/v2/shops/moodswingvintage/sections?api_key='.$apiKey)
+                ->toArray();
         $apiCategories = $apiResponse['results'];
         foreach ($apiCategories as $apiCategory) {
             $category = $categoryRepo->findOneBy(['etsy_id' => $apiCategory['shop_section_id']]);
-
+            
             if ($category === null) {
                 $category = new Category();
                 $category->setName($apiCategory['title']);
@@ -94,9 +110,10 @@ class MainController extends AbstractController
             }
         }
         $this->addFlash('success', 'The categories have been updated');
+        
         return $this->redirectToRoute('homepage');
     }
-
+    
     /**
      * @Route("/products/update", name="update_products")
      * @IsGranted("ROLE_ADMIN")
@@ -105,21 +122,24 @@ class MainController extends AbstractController
     {
         // // Solution 1 : vider bdd et re-remplir BOF BOF
         // $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
-       
+        
         // foreach ($products as $product) {
         //     $manager->remove($product);
         // }
-
+        
         $client = HttpClient::create();
         $apiKey = "2bqddccebry4nblkj11o6ugv";
         // get all the products from the shop
-        $apiProductsResponse = $client->request('GET', 'https://openapi.etsy.com/v2/shops/moodswingvintage/listings/active?includes=MainImage&limit=70&api_key=' . $apiKey)->toArray();
+        $apiProductsResponse = $client->request(
+            'GET',
+            'https://openapi.etsy.com/v2/shops/moodswingvintage/listings/active?includes=MainImage&limit=70&api_key='.$apiKey
+        )->toArray();
         $apiProducts = $apiProductsResponse['results'];
-
+        
         $manager = $this->getDoctrine()->getManager();
         // PRODUCTS
         $products = $this->getDoctrine()->getRepository(Product::class)->findAll();
-       
+        
         foreach ($apiProducts as $apiProduct) {
             // Solution 2 : prendre tous les produits -> comparer titre avec résultats api -> si false -> suppr from bdd
             foreach ($products as $product) {
@@ -130,7 +150,7 @@ class MainController extends AbstractController
             }
             // does the product already exists in db ?
             $product = $productRepo->findOneBy(['etsy_id' => $apiProduct['listing_id']]);
-
+            
             if ($product !== null) {
                 // update info
                 $product->setName($apiProduct['title']);
@@ -147,20 +167,21 @@ class MainController extends AbstractController
                 $product->setEtsyLink($apiProduct['url']);
                 $product->setEtsyId($apiProduct['listing_id']);
                 $product->setCreatedAt(new \DateTime('now'));
-
+                
                 $category = $categoryRepo->findOneBy(['etsy_id' => $apiProduct['shop_section_id']]);
                 $product->setCategory($category);
             }
             // make get request to get all pictures from product
-
+            
             $manager->persist($product);
             $manager->flush();
         }
         $this->updatePictures();
         $this->addFlash('success', 'The products have been updated');
+        
         return $this->redirectToRoute('homepage');
     }
-
+    
     /**
      * @Route("/pictures/update", name="update_pictures")
      * @IsGranted("ROLE_ADMIN")
@@ -174,11 +195,14 @@ class MainController extends AbstractController
         $products = $productRepo->findAll();
         foreach ($products as $product) {
             // get product images from api
-            $apiProductPicturesResponse = $client->request('GET', 'https://openapi.etsy.com/v2/listings/' . $product->getEtsyId() . '/images?api_key=' . $apiKey)->toArray();
+            $apiProductPicturesResponse = $client->request(
+                'GET',
+                'https://openapi.etsy.com/v2/listings/'.$product->getEtsyId().'/images?api_key='.$apiKey
+            )->toArray();
             $apiProductPictures = $apiProductPicturesResponse['results'];
             foreach ($apiProductPictures as $apiProductPicture) {
                 $productPicture = $pictureRepo->findOneBy(['etsy_id' => $apiProductPicture['listing_image_id']]);
-
+                
                 if ($productPicture === null) {
                     $picture = new Picture();
                     $picture->setHomepagePath($apiProductPicture['url_570xN']);
@@ -194,8 +218,8 @@ class MainController extends AbstractController
             }
         }
     }
-
-
+    
+    
     /**
      * @Route("/legal/fr", name="legal_notice_fr")
      */
@@ -203,7 +227,7 @@ class MainController extends AbstractController
     {
         return $this->render('legal/legal_fr.html.twig');
     }
-
+    
     /**
      * @Route("/legal/en", name="legal_notice_en")
      */
@@ -211,7 +235,7 @@ class MainController extends AbstractController
     {
         return $this->render('legal/legal_en.html.twig');
     }
-
+    
     /**
      * @Route("/about", name="about")
      */

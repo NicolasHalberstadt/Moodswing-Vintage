@@ -25,11 +25,11 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-        $google_recaptcha_site_key = $this->getParameter('google_recaptcha_site_key');
+        $google_recaptcha_site_key = $this->getParameter('app.google_recaptcha_site_key');
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (isset($_POST['g-recaptcha-response'])) {
-                $secret = $this->getParameter('google_recatcha_secret');
+                $secret = $this->getParameter('app.google_recaptcha_secret');
                 $recaptcha = new ReCaptcha($secret);
                 $resp = $recaptcha->verify($_POST['g-recaptcha-response']);
 
@@ -50,11 +50,16 @@ class UserController extends AbstractController
             }
         }
 
-        return $this->render('user/signup.html.twig', [
+        $response = $this->render('user/signup.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
             'google_recaptcha_site_key' => $google_recaptcha_site_key
         ]);
+    
+        $response->setPublic();
+        $response->setMaxAge(3600);
+        
+        return $response;
     }
 
     /**
